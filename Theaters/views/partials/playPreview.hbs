@@ -1,0 +1,14 @@
+<div>
+    <div class="home-image">
+        <img src="{{imageUrl}}" alt="Card image cap"></img>
+    </div>
+    <div class="info">
+        <h4>{{title}}</h4>
+        <div class="info-buttons">
+            {{#unless hasUser}}
+            <a class="btn details" href="/details/{{_id}}">Details</a>
+            <span class="likes">{{users.length}} likes</span>
+       {{/unless}}
+        </div>
+    </div>
+</div>
