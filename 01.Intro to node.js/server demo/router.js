@@ -1,3 +1,5 @@
+const { layout } = require("./util");
+
 const routes = {};
 
 const defaultPage = `
@@ -6,9 +8,9 @@ const defaultPage = `
 `;
 
 function main(req, res) {
-  console.log(req.method, req.url);
+//   console.log(req.method, req.url);
   const url = new URL(req.url, `http://${req.headers.host}`);
-  const handler = match(url);
+  const handler = routes[url.pathname];
   if (typeof handler == "function") {
     handler(req, res);
   } else {
@@ -16,10 +18,10 @@ function main(req, res) {
   }
 }
 
-function match(url) {
-  const handler = routes[url.pathname];
-  return handler;
-}
+// function match(url) {
+//   const handler = routes[url.pathname];
+//   return handler;
+// }
 function defaultController(req, res) {
   res.statusCode = 404;
   res.write(layout(defaultPage));
