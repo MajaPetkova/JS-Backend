@@ -8,20 +8,34 @@ const defaultPage = `
 `;
 
 function main(req, res) {
-//   console.log(req.method, req.url);
+  //   console.log(req.method, req.url);
   const url = new URL(req.url, `http://${req.headers.host}`);
-  const handler = routes[url.pathname];
+  let handler;
+  const actions = routes[url.pathname];
+  if (actions) {
+    handler = actions[req.method];
+  }
   if (typeof handler == "function") {
     handler(req, res);
   } else {
-    defaultController(req, res)
+    defaultController(req, res);
   }
 }
 
-function register(pathname, handler){
-    routes[pathname] = handler;
-
+function register(method, pathname, handler) {
+  if (routes[pathname] == undefined) {
+    routes[pathname] = {};
+  }
+  routes[pathname][method] = handler;
 }
+
+function get(pathname, handler) {
+  register("GET", pathname, handler);
+}
+function post(pathname, handler) {
+  register("POST", pathname, handler);
+}
+
 function defaultController(req, res) {
   res.statusCode = 404;
   res.write(layout(defaultPage));
@@ -30,5 +44,7 @@ function defaultController(req, res) {
 
 module.exports = {
   main,
-  register
+  register,
+  get,
+  post
 };
