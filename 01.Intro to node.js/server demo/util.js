@@ -34,6 +34,10 @@ function nextId() {
     ((Math.random() * 16) | 0).toString(16)
   );
 }
+
+function deleteItem(id){
+  delete data[id];
+}
 const data = {
   "4f65h7f6": {
     name: "product 1",
@@ -43,7 +47,7 @@ const data = {
     name: "product 2",
     color: "blue",
   },
-  "556d326g": {
+  "556d3g26": {
     name: "product 3",
     color: "green",
   },
@@ -56,5 +60,6 @@ const data = {
 module.exports = {
   layout,
   addItem,
-  getItems
+  getItems,
+  deleteItem
 };

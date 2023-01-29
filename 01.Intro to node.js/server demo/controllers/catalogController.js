@@ -1,4 +1,4 @@
-const { layout, getItems,addItem } = require("../util");
+const { layout, getItems,addItem, deleteItem } = require("../util");
 const { IncomingForm } = require("formidable");
 
 const catalogPage = (data) => `
@@ -15,7 +15,7 @@ const catalogPage = (data) => `
 <input type="submit" value="Create Item"/>
 </form>
 <ul> 
- ${data.map((i) => `<li>${i.name} -${i.color}</li>`).join("\n")}
+ ${data.map((i) => `<li>${i.name} -${i.color} <a href = "/delete?id=${i.id}"> [&#10006  Delete]</a> </li>`).join("\n")}
 </ul>
 `;
 
@@ -43,7 +43,18 @@ function createController(req, res) {
     res.end();
   });
 }
+function deleteController(req, res){
+// console.log("delete request");
+const id= req.url.searchParams.get("id");
+deleteItem(id);
+
+res.writeHead(301, {
+    Location: "/catalog",
+  });
+  res.end();
+}
 module.exports = {
   catalogController,
   createController,
+  deleteController
 };
