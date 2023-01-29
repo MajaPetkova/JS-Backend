@@ -1,4 +1,4 @@
-const { layout, data } = require("../util");
+const { layout, getItems,addItem } = require("../util");
 const { IncomingForm } = require("formidable");
 
 const catalogPage = (data) => `
@@ -15,11 +15,12 @@ const catalogPage = (data) => `
 <input type="submit" value="Create Item"/>
 </form>
 <ul> 
-${data.map((i) => `<li>${i.name} -${i.color}</li>`).join("\n")}
+ ${data.map((i) => `<li>${i.name} -${i.color}</li>`).join("\n")}
 </ul>
 `;
 
 function catalogController(req, res) {
+    const data= getItems();
   res.write(layout(catalogPage(data)));
   res.end();
 }
@@ -30,17 +31,17 @@ function createController(req, res) {
   form.parse(req, (err, fields) => {
     console.log(fields);
 
-   const item= {
-    name: fields.name,
-    color: fields.color
-   }
- data.push(item)
+    const item = {
+      name: fields.name,
+      color: fields.color,
+    };
+   addItem(fields.name, fields.color)
+    // data.push(item);
     res.writeHead(301, {
       Location: "/catalog",
     });
     res.end();
   });
-
 }
 module.exports = {
   catalogController,

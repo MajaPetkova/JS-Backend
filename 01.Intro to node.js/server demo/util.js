@@ -16,25 +16,45 @@ function layout(body, title = "Hello World") {
   </body>
   </html>`;
 }
-const data = [
-  {
+
+function addItem(name, color) {
+  const id = nextId();
+  data[id] = {
+    name,
+    color
+  }
+}
+
+function getItems(){
+return Object.entries(data).map(([id, item]) => Object.assign({}, item, {id}))
+}
+
+function nextId() {
+  return "xxxxxxxx".replace(/x/g, () =>
+    ((Math.random() * 16) | 0).toString(16)
+  );
+}
+const data = {
+  "4f65h7f6": {
     name: "product 1",
     color: "red",
   },
-  {
+  "21d54g15": {
     name: "product 2",
     color: "blue",
   },
-  {
+  "556d326g": {
     name: "product 3",
     color: "green",
   },
-  {
+  "45d3d353": {
     name: "product 4",
     color: "purple",
   },
-];
+};
+
 module.exports = {
   layout,
-  data
+  addItem,
+  getItems
 };
