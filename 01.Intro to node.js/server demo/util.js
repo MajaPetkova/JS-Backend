@@ -16,7 +16,25 @@ function layout(body, title = "Hello World") {
   </body>
   </html>`;
 }
-
+const data = [
+  {
+    name: "product 1",
+    color: "red",
+  },
+  {
+    name: "product 2",
+    color: "blue",
+  },
+  {
+    name: "product 3",
+    color: "green",
+  },
+  {
+    name: "product 4",
+    color: "purple",
+  },
+];
 module.exports = {
   layout,
+  data
 };
