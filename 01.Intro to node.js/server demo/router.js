@@ -18,10 +18,10 @@ function main(req, res) {
   }
 }
 
-// function match(url) {
-//   const handler = routes[url.pathname];
-//   return handler;
-// }
+function register(pathname, handler){
+    routes[pathname] = handler;
+
+}
 function defaultController(req, res) {
   res.statusCode = 404;
   res.write(layout(defaultPage));
@@ -30,5 +30,5 @@ function defaultController(req, res) {
 
 module.exports = {
   main,
-  routes,
+  register
 };
