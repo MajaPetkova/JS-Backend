@@ -7,7 +7,7 @@ const logger= require("./logger");
 const app = express();
 
 app.use(logger);
-
+app.use("/content", express.static("public"))
 app.use("/catalog", catalogController);
 
 app.get("/", (req, res) => {
