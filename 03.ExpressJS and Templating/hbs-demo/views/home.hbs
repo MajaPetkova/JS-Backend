@@ -1,2 +1,27 @@
-<h1>Hello, handlebars</h1>
-<p>Welcome to our site</p>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handlebars Demo</title>
+  </head>
+  <body>
+    <h1>Hello, handlebars</h1>
+    <p>Welcome to our site</p>
+    {{#if count}}
+    <p>Site visited {{count}} times</p>
+    {{else}}
+    <p>You are the first visitor</p>
+    {{/if}}
+
+<h2>Catalog</h2>
+<ul>
+    {{#each products }}
+    <li>{{name}} - {{price}}$</li>
+    {{else}}
+    <i>No products in database</i>
+    {{/each}}
+</ul>
+
+  </body>
+</html>
