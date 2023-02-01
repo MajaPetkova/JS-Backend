@@ -25,9 +25,15 @@ const products = [
 app.get("/", (req, res) => {
   res.locals = {
     count: visitors++,
-    products
+
   };
-  res.render("home", { layout: false });
+  res.render("home");
 });
+app.get("/catalog", (req, res) => {
+    res.locals = {
+         products
+    };
+    res.render("catalog");
+  });
 
 app.listen(3000, () => console.log("App is listening on port 3000"));
