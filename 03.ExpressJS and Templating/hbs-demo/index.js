@@ -20,12 +20,14 @@ const products = [
   {
     name: "Product 3",
     price: 34,
+    promoted: true
   },
 ];
 app.get("/", (req, res) => {
   res.locals = {
     count: visitors++,
-
+  user :{username: "Peter",
+        email:"peter@abv.bg"}
   };
   res.render("home");
 });

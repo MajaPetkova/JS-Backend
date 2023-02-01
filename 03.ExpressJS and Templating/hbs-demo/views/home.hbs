@@ -1,5 +1,10 @@
     <h1>Hello, handlebars</h1>
-    <p>Welcome to our site</p>
+    <div>
+        {{#with user}}
+    <p>Welcome, {{username}}</p>
+    <p>Your email is: {{email}}</p>
+    </div>
+    {{/with}}
     {{#if count}}
     <p>Site visited {{count}} times</p>
     {{else}}
