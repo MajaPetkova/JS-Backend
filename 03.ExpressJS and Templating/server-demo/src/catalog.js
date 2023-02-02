@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { getProducts, createProduct } = require("./data");
+const { getProducts, createProduct, getProductById} = require("./data");
 
 router.get("/", async (req, res) => {
   const products = await getProducts();
@@ -26,6 +26,12 @@ router.post("/create", async(req, res)=>{
     res.redirect("/catalog")
 })
 
+router.get("/edit/:id", async (req, res)=>{
+    const product = await getProductById(req.params.id);
+
+    res.render("edit", product);
+
+})
 
 
 

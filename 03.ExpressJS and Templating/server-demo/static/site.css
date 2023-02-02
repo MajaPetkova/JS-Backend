@@ -29,5 +29,8 @@ label {
 }
 label span{
     display: inline-block;
-    width: 75px;
+    width: 65px;
+}
+.promoted{
+    color:rgb(249, 94, 77);
 }

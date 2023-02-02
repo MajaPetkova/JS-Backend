@@ -5,7 +5,7 @@
 <a href="/catalog/create">Create Product</a>
 <ul>
     {{#each products}}
-    <li>{{name}} - {{price}}$</li>
+    {{> product}}
     {{else}}
     <span class="italics">No products in database</span>
     {{/each}}
