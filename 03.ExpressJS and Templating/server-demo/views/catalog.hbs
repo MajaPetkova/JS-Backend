@@ -1,9 +1,11 @@
 <h1>Catalog</h1>
 
 <p>Products:</p>
+
+<a href="/catalog/create">Create Product</a>
 <ul>
     {{#each products}}
-    <li>{{name}} - {{price}}</li>
+    <li>{{name}} - {{price}}$</li>
     {{else}}
     <span class="italics">No products in database</span>
     {{/each}}
