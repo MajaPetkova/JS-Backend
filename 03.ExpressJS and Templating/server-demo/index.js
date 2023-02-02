@@ -1,5 +1,6 @@
 const express = require("express");
 const hbs = require("express-handlebars");
+const catalogRouter= require("./src/catalog")
 const homeController= require("./src/home");
 
 
@@ -10,7 +11,8 @@ app.set("view engine" , ".hbs" )
 
 
 app.use("/content" , express.static("static"))
-app.get("/" , homeController )
+app.get("/" , homeController );
+app.use("/catalog", catalogRouter)
 app.listen(3000, ()=> console.log("App listening on port 3000"));
 
 // Home page

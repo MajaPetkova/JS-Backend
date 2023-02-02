@@ -1,15 +1,13 @@
 const fs = require("fs").promises;
 
 async function readFile() {
-  const data = JSON.parse(
-    (await fs.readFile("./products.json")).toString()
-  );
+  const data = JSON.parse((await fs.readFile("./products.json")).toString());
   return data;
 }
 async function getProducts() {
   const data = await readFile();
 
-  return Object.entries(data).map((_id, item) =>
+  return Object.entries(data).map(([_id, item]) =>
     Object.assign({}, item, { _id })
   );
 }

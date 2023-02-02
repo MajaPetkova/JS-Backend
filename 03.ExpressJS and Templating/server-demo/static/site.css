@@ -1,3 +1,25 @@
 body{
     background-color: rgb(246, 214, 211);
+    width: 980px;
+}
+nav li {
+    list-style-type: none;
+}
+nav ul li {
+    display: inline-block;
+    padding: 5px;
+}
+nav li a{
+    text-decoration: none;
+    background-color: white;
+    color: rgb(75, 71, 71);
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+nav li a:hover{
+    background-color: salmon;
+    color: white;
+}
+.italics{
+font-style: italic;
 }
