@@ -238,6 +238,12 @@ footer {
     color: white;
     font-size: 20px;
 }
+.description{
+    display: none;
+}
+.description p{
+    padding: 4px 8px;
+}
 
 /*Animations & Transitions
 */

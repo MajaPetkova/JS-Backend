@@ -6,10 +6,11 @@
         <input type="number" name="to" class="difficulty" placeholder="Price to..." value="{{query.to}}">
         <input type="submit" value="search">
       </form>
-      <div>
+      <div id="cars">
       {{#each cars}}
       {{> carPreview}}
       {{else}}
       <p>No cars in database. <a href="/create"> Create the first listing!</a></p>
       {{/each}}
       </div>
+      <script src="/static/js/app.js" type="module"></script>
