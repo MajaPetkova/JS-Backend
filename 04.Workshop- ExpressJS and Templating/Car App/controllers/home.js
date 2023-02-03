@@ -1,7 +1,12 @@
+const { query } = require("express");
+
 module.exports = {
   async home(req, res) {
-    const cars = await req.storage.getAllCars();
+    // console.log(req.query)
+    const cars = await req.storage.getAllCars(req.query);
     // console.log(cars);
-    res.render("index", {cars, title: "Carbicle"});
+
+
+    res.render("index", {cars, title: "Carbicle", query: req.query});
   },
 };
