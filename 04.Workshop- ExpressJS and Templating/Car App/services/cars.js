@@ -1,4 +1,3 @@
-
 const fs = require("fs/promises");
 
 async function read() {
@@ -23,13 +22,24 @@ async function write(data) {
 
 async function getAllCars() {
   const data = await read();
-    // console.log(Object.entries(data))
+  // console.log(Object.entries(data))
   return Object.entries(data).map(([id, v]) => Object.assign({}, { id }, v));
+}
+
+async function getCarById(id) {
+  const data = await read();
+  const car = data[id];
+  if(car){
+    return Object.assign({}, { id }, car);
+  }else{
+    return undefined
+  }
 }
 
 module.exports = () => (req, res, next) => {
   req.storage = {
-    getAllCars
+    getAllCars,
+    getCarById,
   };
   next();
 };
