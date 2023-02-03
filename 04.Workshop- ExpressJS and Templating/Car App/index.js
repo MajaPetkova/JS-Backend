@@ -15,6 +15,7 @@ const  create  = require("./controllers/create");
 const { details } = require("./controllers/details");
 const { home } = require("./controllers/home");
 const { notFound } = require("./controllers/notFound");
+const deleteCar = require("./controllers/delete")
 
 const app = express();
 
@@ -33,6 +34,8 @@ app.get("/about", about);
 app.get("/create", create.get);
 app.post("/create", create.post);
 app.get("/details/:id", details);
+app.get("/delete/:id", deleteCar.get);
+app.post("/delete/:id", deleteCar.post);
 app.get("*", notFound);
 
 app.listen(3000, () => console.log("App is listening on port 3000"));
