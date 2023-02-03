@@ -1,8 +1,20 @@
 {
-    "asdf1234":{
-        "name": "Toyota Avensis 1.6i",
-        "description": "Imported from Denmark. 203 000 km with full service history. No blemishes on the paint. Petrol engine.",
-        "imageUrl": "https://assets.adac.de/image/upload/w_898/Autodatenbank/GWInfo/gw0214-toyota-avensis-2003-2009.jpg",
-        "price": "3587"
-    }
+  "asdf1234": {
+    "name": "Toyota Avensis 1.6i",
+    "description": "Imported from Denmark. 203 000 km with full service history. No blemishes on the paint. Petrol engine.",
+    "imageUrl": "https://assets.adac.de/image/upload/w_898/Autodatenbank/GWInfo/gw0214-toyota-avensis-2003-2009.jpg",
+    "price": "3587"
+  },
+  "f53141b6": {
+    "name": "Subaru Legasy 2.01",
+    "description": "Newly Imported, 200 284km, from Germany",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGlpLg42sAG1db1oLMLeWpy_wa1Gc5tU4rRlwbV0252tso8LGQZktPw6DTZeJjrMzxa4g&usqp=CAU",
+    "price": 2899
+  },
+  "1a929edc": {
+    "name": "VW Golf 1.9",
+    "description": "Newly Imported, the price is non-negotiable",
+    "imageUrl": "https://imgr1.auto-motor-und-sport.de/VW-Golf-V-1-9-TDI-2003--article169Gallery-f354fa2d-1638258.jpg",
+    "price": 2687
+  }
 }

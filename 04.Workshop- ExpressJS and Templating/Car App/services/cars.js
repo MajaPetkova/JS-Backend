@@ -12,7 +12,7 @@ async function read() {
 }
 async function write(data) {
   try {
-    await fs.writeFile("./services/data.json", JSON.stringify(data));
+    await fs.writeFile("./services/data.json", JSON.stringify(data, null, 2));
   } catch (err) {
     console.error("Database write error");
     console.log(err);
@@ -29,17 +29,32 @@ async function getAllCars() {
 async function getCarById(id) {
   const data = await read();
   const car = data[id];
-  if(car){
+  if (car) {
     return Object.assign({}, { id }, car);
-  }else{
-    return undefined
+  } else {
+    return undefined;
   }
 }
+async function createCar(car) {
+  const cars = await read();
+  let id;
+  do {
+    id = nextId();
+  } while (cars.hasOwnProperty(id));
+  cars[id] = car;
+  await write(cars);
+}
 
+function nextId() {
+  return "xxxxxxxx".replace(/x/g, () =>
+    ((Math.random() * 16) | 0).toString(16)
+  );
+}
 module.exports = () => (req, res, next) => {
   req.storage = {
     getAllCars,
     getCarById,
+    createCar
   };
   next();
 };
