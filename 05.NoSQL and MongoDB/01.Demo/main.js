@@ -31,5 +31,7 @@ async function start() {
 const post = await Post.findOne({}).populate("comments", "content");
 // post.comments.push(comment);
 // await post.save();
-console.log(post)
+console.log(post);
+//delete all comments
+Comment.deleteMany({post: post._id})
 }
