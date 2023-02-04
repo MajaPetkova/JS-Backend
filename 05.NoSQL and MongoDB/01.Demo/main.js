@@ -26,8 +26,10 @@ async function start() {
 //     content: "Nice Article"
 // });
 
-const comment=await Comment.findOne({});
-const post = await Post.findOne({});
-post.comments.push(comment);
-await post.save();
+// const comment=await Comment.findOne({});
+
+const post = await Post.findOne({}).populate("comments", "content");
+// post.comments.push(comment);
+// await post.save();
+console.log(post)
 }
