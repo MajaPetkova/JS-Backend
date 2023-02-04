@@ -2,27 +2,32 @@ const mongoose = require("mongoose");
 
 const connectionString = "mongodb://localhost:27017/testdb";
 
+
+const carSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    price: { type: Number, default: 0 },
+});
+
+carSchema.methods.startEngine = function(){
+    console.log(`${this.name} goes vroom!`)
+}
+const Car = mongoose.model("Car", carSchema);
+
 start();
 async function start() {
   await mongoose.connect(connectionString, {
     useUnifiedTopology: true,
-    UseNewUrlParser: true,
+    useNewUrlParser: true,
   });
   console.log("Database connected");
 
-  const carSchema = new mongoose.Schema({
-    name: String,
-    price: Number,
-  });
+//   const car = new Car({
+//     name: "VW Golf 3",
+//     // price: 3200,
+//   });
+//   await car.save(); // writing data
 
-  const Car = mongoose.model("Car", carSchema);
-
-  const car = new Car({
-    name: "VW Golf 3",
-    price: 3200,
-  });
-  await car.save();
-
-  const data = await Car.find({});
+  const data = await Car.find({}); // reading data
   console.log(data);
+  data.forEach(c=> c.startEngine())
 }
