@@ -14,6 +14,8 @@
 const express = require("express");
 const hbs = require("express-handlebars");
 const carsService = require("./services/cars");
+const accessoryService= require("./services/accessory");
+
 
 const initDb = require("./models/index");
 
@@ -24,7 +26,7 @@ const { home } = require("./controllers/home");
 const { notFound } = require("./controllers/notFound");
 const deleteCar = require("./controllers/delete");
 const edit = require("./controllers/edit");
-
+const accessory= require("./controllers/accessory")
 
 start();
 async function start() {
@@ -39,6 +41,7 @@ async function start() {
   app.use("/static", express.static("static"));
 
   app.use(carsService());
+  app.use(accessoryService())
 
   app.get("/", home);
   app.get("/about", about);
@@ -49,6 +52,8 @@ async function start() {
   app.post("/delete/:id", deleteCar.post);
   app.get("/edit/:id", edit.get);
   app.post("/edit/:id", edit.post);
+  app.get("/accessory", accessory.get);
+  app.post("/accessory", accessory.post);
   app.get("*", notFound);
 
   app.listen(3000, () => console.log("App is listening on port 3000"));
