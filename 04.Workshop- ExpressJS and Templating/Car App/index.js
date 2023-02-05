@@ -8,6 +8,7 @@
 // add database connection
 // create Car model
 // upgrade car service to use Car model
+// add validation rules to Car model
 // create Accessory model
 
 const express = require("express");
