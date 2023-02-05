@@ -1,4 +1,4 @@
-const fs = require("fs/promises");
+// const fs = require("fs/promises");
 const Car = require("../models/Car");
 
 // async function read() {
@@ -40,10 +40,10 @@ async function getAllCars(query) {
     options.price = { $gte: Number(query.from) };
   }
   if (query.to) {
-    if(!options.price){
-     options.price= {};
+    if (!options.price) {
+      options.price = {};
     }
-    options.price.$lte= Number(query.to) 
+    options.price.$lte = Number(query.to);
   }
   // console.log(options)
   const cars = await Car.find(options).lean();

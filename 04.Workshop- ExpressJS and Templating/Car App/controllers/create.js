@@ -11,8 +11,12 @@ module.exports = {
       price: Number(req.body.price)
     };
 
-    await req.storage.createCar(car);
-    
-    res.redirect("/");
-  },
+    try{
+      await req.storage.createCar(car);
+      res.redirect("/");
+    }catch(err){
+      console.log("Error creating record")
+      res.redirect("/create");
+    }
+  }
 };
