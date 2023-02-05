@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Car= require ("./Car")
 
 const connectionString = "mongodb://localhost:27017/carbicle";
 
@@ -20,3 +21,4 @@ async function init() {
   }
 }
 module.exports = init;
+ 
