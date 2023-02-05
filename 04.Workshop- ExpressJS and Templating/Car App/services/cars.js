@@ -31,7 +31,22 @@ function carViewModel(car) {
 }
 
 async function getAllCars(query) {
-  const cars = await Car.find({}).lean();
+  // console.log(query.search)
+  const options = {};
+  if (query.search) {
+    options.name = new RegExp(query.search, "i");
+  }
+  if (query.from) {
+    options.price = { $gte: Number(query.from) };
+  }
+  if (query.to) {
+    if(!options.price){
+     options.price= {};
+    }
+    options.price.$lte= Number(query.to) 
+  }
+  // console.log(options)
+  const cars = await Car.find(options).lean();
   return cars;
   // const data = await read();
   // // console.log(Object.entries(data))
@@ -70,13 +85,15 @@ async function getCarById(id) {
   // }
 }
 async function createCar(car) {
-  const cars = await read();
-  let id;
-  do {
-    id = nextId();
-  } while (cars.hasOwnProperty(id));
-  cars[id] = car;
-  await write(cars);
+  const newCar = new Car(car);
+  newCar.save();
+  // const cars = await read();
+  // let id;
+  // do {
+  //   id = nextId();
+  // } while (cars.hasOwnProperty(id));
+  // cars[id] = car;
+  // await write(cars);
 }
 
 async function deleteCarById(id) {
