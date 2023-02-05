@@ -1,25 +1,25 @@
 const fs = require("fs/promises");
 const Car = require("../models/Car");
 
-async function read() {
-  try {
-    const file = await fs.readFile("./services/data.json");
-    return JSON.parse(file);
-  } catch (err) {
-    console.error("Database read error");
-    console.log(err);
-    process.exit(1);
-  }
-}
-async function write(data) {
-  try {
-    await fs.writeFile("./services/data.json", JSON.stringify(data, null, 2));
-  } catch (err) {
-    console.error("Database write error");
-    console.log(err);
-    process.exit(1);
-  }
-}
+// async function read() {
+//   try {
+//     const file = await fs.readFile("./services/data.json");
+//     return JSON.parse(file);
+//   } catch (err) {
+//     console.error("Database read error");
+//     console.log(err);
+//     process.exit(1);
+//   }
+// }
+// async function write(data) {
+//   try {
+//     await fs.writeFile("./services/data.json", JSON.stringify(data, null, 2));
+//   } catch (err) {
+//     console.error("Database write error");
+//     console.log(err);
+//     process.exit(1);
+//   }
+// }
 function carViewModel(car) {
   return {
     id: car._id,
@@ -97,7 +97,9 @@ async function createCar(car) {
 }
 
 async function deleteCarById(id) {
-  const data = await read();
+  await Car.findByIdAndDelete(id);
+  // await Car.findByIdAndDelete('554632346553');
+  // const data = await read();
 
   if (data.hasOwnProperty(id)) {
     delete data[id];
@@ -108,21 +110,30 @@ async function deleteCarById(id) {
 }
 
 async function updateCarById(id, car) {
-  const data = await read();
+  await Car.findByIdAndUpdate(id, car);
+  // const existing = await Car.findById(id);
 
-  if (data.hasOwnProperty(id)) {
-    data[id] = car;
-    await write(data);
-  } else {
-    throw new ReferenceError("No such id in database");
-  }
+  // existing.name = car.name;
+  // existing.description = car.description;
+  // existing.imageUrl = car.imageUrl || undefined;
+  // existing.price = car.price;
+
+  // await existing.save();
+  // const data = await read();
+
+  // if (data.hasOwnProperty(id)) {
+  //   data[id] = car;
+  //   await write(data);
+  // } else {
+  //   throw new ReferenceError("No such id in database");
+  // }
 }
 
-function nextId() {
-  return "xxxxxxxx".replace(/x/g, () =>
-    ((Math.random() * 16) | 0).toString(16)
-  );
-}
+// function nextId() {
+//   return "xxxxxxxx".replace(/x/g, () =>
+//     ((Math.random() * 16) | 0).toString(16)
+//   );
+// }
 module.exports = () => (req, res, next) => {
   req.storage = {
     getAllCars,

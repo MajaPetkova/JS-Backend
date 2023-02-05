@@ -10,19 +10,19 @@ module.exports = {
   },
   async post(req, res) {
     const id = req.params.id;
-    const car= {
+    const car = {
       name: req.body.name,
       description: req.body.description,
       imageUrl: req.body.imageUrl,
-      price: Number(req.body.price)    
-    }
-    
+      price: Number(req.body.price),
+    };
+
     try {
-        await req.storage.updateCarById(id, car);
+      await req.storage.updateCarById(id, car);
       res.redirect("/");
     } catch (err) {
-        res.redirect("/404");
+      res.redirect("/404");
     }
-    res.redirect("/")
+    res.redirect("/");
   },
 };

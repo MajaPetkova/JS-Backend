@@ -14,6 +14,7 @@ module.exports = {
         await req.storage.deleteCarById(id);
       res.redirect("/");
     } catch (err) {
+      console.log("Attempted to delete non-existent id", id)
         res.redirect("/404");
     }
   },
