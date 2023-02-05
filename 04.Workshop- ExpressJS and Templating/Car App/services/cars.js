@@ -110,15 +110,15 @@ async function deleteCarById(id) {
 }
 
 async function updateCarById(id, car) {
-  await Car.findByIdAndUpdate(id, car);
-  // const existing = await Car.findById(id);
+  // await Car.findByIdAndUpdate(id, car);
+  const existing = await Car.findById(id);
 
-  // existing.name = car.name;
-  // existing.description = car.description;
-  // existing.imageUrl = car.imageUrl || undefined;
-  // existing.price = car.price;
+  existing.name = car.name;
+  existing.description = car.description;
+  existing.imageUrl = car.imageUrl || undefined;
+  existing.price =car.price;
 
-  // await existing.save();
+  await existing.save();
   // const data = await read();
 
   // if (data.hasOwnProperty(id)) {
