@@ -26,7 +26,8 @@ const { home } = require("./controllers/home");
 const { notFound } = require("./controllers/notFound");
 const deleteCar = require("./controllers/delete");
 const edit = require("./controllers/edit");
-const accessory= require("./controllers/accessory")
+const accessory= require("./controllers/accessory");
+const attach = require("./controllers/attach");
 
 start();
 async function start() {
@@ -54,6 +55,8 @@ async function start() {
   app.post("/edit/:id", edit.post);
   app.get("/accessory", accessory.get);
   app.post("/accessory", accessory.post);
+  app.get("/attach/:id", attach.get);
+  app.post("/attach/:id", attach.post)
   app.get("*", notFound);
 
   app.listen(3000, () => console.log("App is listening on port 3000"));
