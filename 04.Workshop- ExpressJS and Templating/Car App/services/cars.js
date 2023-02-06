@@ -27,6 +27,7 @@ function carViewModel(car) {
     description: car.description,
     imageUrl: car.imageUrl,
     price: car.price,
+    accessories: car.accessories,
   };
 }
 
@@ -116,7 +117,8 @@ async function updateCarById(id, car) {
   existing.name = car.name;
   existing.description = car.description;
   existing.imageUrl = car.imageUrl || undefined;
-  existing.price =car.price;
+  existing.price = car.price;
+  existing.accessories = car.accessories;
 
   await existing.save();
   // const data = await read();
@@ -129,6 +131,11 @@ async function updateCarById(id, car) {
   // }
 }
 
+async function attachAccessory(carId, accessoryId) {
+  const existing = await Car.findById(carId);
+  existing.accessories.push(accessoryId);
+  await existing.save();
+}
 // function nextId() {
 //   return "xxxxxxxx".replace(/x/g, () =>
 //     ((Math.random() * 16) | 0).toString(16)
@@ -141,6 +148,7 @@ module.exports = () => (req, res, next) => {
     createCar,
     updateCarById,
     deleteCarById,
+    attachAccessory
   };
   next();
 };
