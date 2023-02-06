@@ -1,5 +1,6 @@
 // const fs = require("fs/promises");
 const Car = require("../models/Car");
+const { carViewModel } = require("./util");
 
 // async function read() {
 //   try {
@@ -20,16 +21,6 @@ const Car = require("../models/Car");
 //     process.exit(1);
 //   }
 // }
-function carViewModel(car) {
-  return {
-    id: car._id,
-    name: car.name,
-    description: car.description,
-    imageUrl: car.imageUrl,
-    price: car.price,
-    accessories: car.accessories,
-  };
-}
 
 async function getAllCars(query) {
   // console.log(query.search)
@@ -70,7 +61,7 @@ async function getAllCars(query) {
 }
 
 async function getCarById(id) {
-  const car = await Car.findById(id);
+  const car = await Car.findById(id).populate("accessories");
   if (car) {
     return carViewModel(car);
   } else {
@@ -148,7 +139,7 @@ module.exports = () => (req, res, next) => {
     createCar,
     updateCarById,
     deleteCarById,
-    attachAccessory
+    attachAccessory,
   };
   next();
 };
