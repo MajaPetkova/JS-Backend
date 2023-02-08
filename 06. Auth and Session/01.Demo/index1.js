@@ -1,19 +1,10 @@
 const express = require("express");
 const expressSession = require("express-session");
+const auth = require("./auth");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 
-const users = {
-  "peter": {
-    username:"peter",
-    password: "123",
-  },
-  "john": {
-    username:"john",
-    password: "123",
-  },
-};
 app.use(
   expressSession({
     secret: "keyboard cat",
@@ -22,7 +13,7 @@ app.use(
     cookie: { secure: false },
   })
 );
-
+app.use(auth())
 app.get("/", (req, res) => {
   // req.session.username= "Pesho" + Math.random();
   //   req.session.user = {
@@ -40,29 +31,22 @@ app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/login.html");
 });
 app.post("/login", (req, res) => {
-  const user = users[req.body.username];
-
-  if (user && req.body.password == user.password) {
-    console.log("successful login " + req.body.username);
-    req.session.user = user;
-    res.redirect("/");
-  } else {
-    res.status(401).send("Incorrect username or password");
-  }
-    console.log(req.session);
-  //   console.log(req.body);
+ if(req.auth.login(req.body.username, req.body.password)){
+    res.redirect("/")
+ }else{
+     res.status(401).send("Incorrect username or password");
+ }
 });
 app.get("/register", (req, res)=>{
     res.sendFile(__dirname + "/register.html")
 });
 app.post ("/register", (req, res) =>{
-    const user= {
-        username: req.body.username,
-        password: req.body.password,
-    }
-    users[req.body.username] = user;
-    console.log("successful register " + req.body.username)
-    res.redirect("/")
+    if(req.auth.register(req.body.username, req.body.password)){
+        res.redirect("/")
+     }else{
+         res.status(409).send("Username already exists");
+     }
+
 })
 
 app.listen(3000, () => console.log("Server is running on port 3000"));
