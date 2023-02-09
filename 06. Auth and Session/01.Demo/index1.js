@@ -13,8 +13,8 @@ app.use(
     cookie: { secure: false },
   })
 );
-app.use(auth())
-app.get("/", (req, res) => {
+app.use(auth());
+app.get("/home", (req, res) => {
   // req.session.username= "Pesho" + Math.random();
   //   req.session.user = {
   //     username: "Peter",
@@ -30,23 +30,22 @@ app.get("/login", (req, res) => {
   console.log(req.session.user);
   res.sendFile(__dirname + "/login.html");
 });
-app.post("/login", (req, res) => {
- if(req.auth.login(req.body.username, req.body.password)){
-    res.redirect("/")
- }else{
-     res.status(401).send("Incorrect username or password");
- }
+app.post("/login", async (req, res) => {
+  if (await req.auth.login(req.body.username, req.body.password)) {
+    res.redirect("/home");
+  } else {
+    res.status(401).send("Incorrect username or password");
+  }
 });
-app.get("/register", (req, res)=>{
-    res.sendFile(__dirname + "/register.html")
+app.get("/register", (req, res) => {
+  res.sendFile(__dirname + "/register.html");
 });
-app.post ("/register", (req, res) =>{
-    if(req.auth.register(req.body.username, req.body.password)){
-        res.redirect("/")
-     }else{
-         res.status(409).send("Username already exists");
-     }
-
-})
+app.post("/register",async (req, res) => {
+  if (await req.auth.register(req.body.username, req.body.password)) {
+    res.redirect("/home");
+  } else {
+    res.status(409).send("Username already exists");
+  }
+});
 
 app.listen(3000, () => console.log("Server is running on port 3000"));
