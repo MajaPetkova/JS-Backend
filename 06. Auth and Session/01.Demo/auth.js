@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 
 module.exports = () => {
-//   const users = {
-//     "4587fd51": { id: "4587fd51", username: "peter", password: "123" },
-//   };
+  const users = {
+    // "4587fd51": { id: "4587fd51", username: "peter", password: "123" },
+  };
   return (req, res, next) => {
     req.auth = {
       login,

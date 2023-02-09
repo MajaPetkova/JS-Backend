@@ -4,6 +4,7 @@
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.0",
     "nodemon": "^2.0.20"
   },
   "name": "01.demo",
@@ -11,7 +12,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index1.js"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
