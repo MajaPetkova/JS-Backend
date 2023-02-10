@@ -6,8 +6,9 @@ module.exports = {
         req.storage.getCarById(id),
         req.accessory.getAllAccessories(),
       ]);
-
-      res.render("attach", { title: "Attach Accessory", car, accessories });
+      const existingIds= car.accessories.map(a=> a.id.toString() );
+      const availableAccessories= accessories.filter(x=> existingIds.includes(x.id.toString()) == false );
+      res.render("attach", { title: "Attach Accessory", car, accessories: availableAccessories });
     } catch (err) {
       res.redirect("/404");
     }
@@ -21,7 +22,7 @@ module.exports = {
         await req.storage.attachAccessory(carId, accessoryId);
       res.redirect("/");
     } catch (err) {
-      console.log("Error creating Accessory");
+      console.log("Error creating accessory");
       console.log(err.message);
       res.redirect("/attach/"+ carId )
     }
