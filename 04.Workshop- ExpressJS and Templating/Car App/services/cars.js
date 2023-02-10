@@ -24,7 +24,9 @@ const { carViewModel } = require("./util");
 
 async function getAllCars(query) {
   // console.log(query.search)
-  const options = {};
+  const options = {
+    isDeleted: false
+  };
   if (query.search) {
     options.name = new RegExp(query.search, "i");
   }
@@ -61,7 +63,7 @@ async function getAllCars(query) {
 }
 
 async function getCarById(id) {
-  const car = await Car.findById(id).populate("accessories");
+  const car = await Car.findById(id).where({isDeleted:false}).populate("accessories");
   if (car) {
     return carViewModel(car);
   } else {
@@ -89,21 +91,24 @@ async function createCar(car) {
 }
 
 async function deleteCarById(id) {
-  await Car.findByIdAndDelete(id);
+  // await Car.findByIdAndDelete(id);
+
+  await Car.findByIdAndUpdate(id, {isDeleted: true});
+
   // await Car.findByIdAndDelete('554632346553');
   // const data = await read();
 
-  if (data.hasOwnProperty(id)) {
-    delete data[id];
-    await write(data);
-  } else {
-    throw new ReferenceError("No such id in database");
-  }
+  // if (data.hasOwnProperty(id)) {
+  //   delete data[id];
+  //   await write(data);
+  // } else {
+  //   throw new ReferenceError("No such id in database");
+  // }
 }
 
 async function updateCarById(id, car) {
   // await Car.findByIdAndUpdate(id, car);
-  const existing = await Car.findById(id);
+  const existing = await Car.findById(id).where({isDeleted:false});
 
   existing.name = car.name;
   existing.description = car.description;
