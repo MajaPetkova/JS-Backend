@@ -32,12 +32,12 @@ async function hashPassword(password) {
 return bcrypt.hash(password, 10);
 
 }
-async function comparePasswords(password, hashedPassword) {
-  return bcrypt.compare(password, hashedPassword);
+async function comparePassword(password, hashedPassword) {
+  return bcrypt.compare(password,hashedPassword )
 }
 module.exports = {
   accessoryViewModel,
   carViewModel,
   hashPassword,
-  comparePasswords
+  comparePassword
 };

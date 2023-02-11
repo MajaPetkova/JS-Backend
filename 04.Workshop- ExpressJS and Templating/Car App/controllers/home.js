@@ -2,7 +2,7 @@ const { query } = require("express");
 
 module.exports = {
   async home(req, res) {
-    // console.log(req.query)
+    console.log(req.session)
     const cars = await req.storage.getAllCars(req.query);
     // console.log(cars);
 

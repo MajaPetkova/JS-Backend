@@ -13,6 +13,7 @@
 
 const express = require("express");
 const hbs = require("express-handlebars");
+const session= require("express-session")
 const carsService = require("./services/cars");
 const accessoryService= require("./services/accessory");
 const authService= require("./services/auth")
@@ -37,6 +38,13 @@ async function start() {
    await initDb();
 
   const app = express();
+
+  app.use(session({
+    secret: "My Super Secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {secure: false}
+  }))
 
   app.engine("hbs", hbs.create({ extname: ".hbs", }).engine);
   app.set("view engine", "hbs");
