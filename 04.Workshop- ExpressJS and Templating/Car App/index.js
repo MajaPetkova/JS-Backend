@@ -28,6 +28,8 @@ const deleteCar = require("./controllers/delete");
 const edit = require("./controllers/edit");
 const accessory= require("./controllers/accessory");
 const attach = require("./controllers/attach");
+const auth= require("./controllers/auth")
+
 
 start();
 async function start() {
@@ -56,7 +58,11 @@ async function start() {
   app.get("/accessory", accessory.get);
   app.post("/accessory", accessory.post);
   app.get("/attach/:id", attach.get);
-  app.post("/attach/:id", attach.post)
+  app.post("/attach/:id", attach.post);
+  app.get("/register", auth.registerGet);
+  app.post("/register", auth.registerPost);
+  app.get("/login", auth.loginGet);
+  app.post("/login", auth.loginPost)
   app.get("*", notFound);
 
   app.listen(3000, () => console.log("App is listening on port 3000"));
