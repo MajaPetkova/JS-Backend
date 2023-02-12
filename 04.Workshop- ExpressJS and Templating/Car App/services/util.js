@@ -7,6 +7,7 @@ function accessoryViewModel(accessory) {
     description: accessory.description,
     imageUrl: accessory.imageUrl,
     price: accessory.price,
+    owner: accessory.owner
   };
 }
 function carViewModel(car) {
@@ -17,6 +18,7 @@ function carViewModel(car) {
     imageUrl: car.imageUrl,
     price: car.price,
     accessories: car.accessories,
+    owner: car.owner
   };
 
   if (model.accessories.length > 0 && model.accessories[0].name) {

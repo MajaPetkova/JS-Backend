@@ -90,10 +90,15 @@ async function createCar(car) {
   // await write(cars);
 }
 
-async function deleteCarById(id) {
+async function deleteCarById(id, ownerId) {
   // await Car.findByIdAndDelete(id);
+  const existing = await Car.findById(id).where({isDeleted:false});
 
+  if(existing.owner != ownerId){
+    return false
+  }
   await Car.findByIdAndUpdate(id, {isDeleted: true});
+  return true;
 
   // await Car.findByIdAndDelete('554632346553');
   // const data = await read();
@@ -106,9 +111,13 @@ async function deleteCarById(id) {
   // }
 }
 
-async function updateCarById(id, car) {
+async function updateCarById(id, car,ownerId ) {
   // await Car.findByIdAndUpdate(id, car);
   const existing = await Car.findById(id).where({isDeleted:false});
+
+if(existing.owner != ownerId){
+  return false
+}
 
   existing.name = car.name;
   existing.description = car.description;
@@ -117,6 +126,7 @@ async function updateCarById(id, car) {
   existing.accessories = car.accessories;
 
   await existing.save();
+  return true;
   // const data = await read();
 
   // if (data.hasOwnProperty(id)) {
@@ -127,8 +137,12 @@ async function updateCarById(id, car) {
   // }
 }
 
-async function attachAccessory(carId, accessoryId) {
+async function attachAccessory(carId, accessoryId, ownerId) {
   const existing = await Car.findById(carId);
+
+  if(existing.owner != ownerId){
+    return false
+  }
   existing.accessories.push(accessoryId);
   await existing.save();
 }

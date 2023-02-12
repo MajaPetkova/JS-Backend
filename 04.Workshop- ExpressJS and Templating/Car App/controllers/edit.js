@@ -2,6 +2,9 @@ module.exports = {
   async get(req, res) {
     const id = req.params.id;
     const car = await req.storage.getCarById(id);
+    if(car.owner != req.session.user.id){
+       return res.redirect("/login")
+    }
     if (car) {
       res.render("edit", { title: `Edit Listing - ${car.name}`, car });
     } else {
@@ -16,12 +19,16 @@ module.exports = {
       imageUrl: req.body.imageUrl,
       price: Number(req.body.price),
     };
-
+   
     try {
-      await req.storage.updateCarById(id, car);
-      res.redirect("/");
+      if( await req.storage.updateCarById(id, car, req.session.user.id)){
+
+        res.redirect("/");
+      }else{
+        res.redirect("/login");
+      }
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message  )
       res.redirect("/404");
     }
    
