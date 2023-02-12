@@ -32,5 +32,8 @@ module.exports = {
     }
 
   },
-  logoutGet(req, res) {},
+  logoutGet(req, res) {
+    req.auth.logout();
+    res.redirect("/")
+  },
 };

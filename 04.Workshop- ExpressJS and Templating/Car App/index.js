@@ -72,7 +72,8 @@ async function start() {
   app.get("/register", auth.registerGet);
   app.post("/register", auth.registerPost);
   app.get("/login", auth.loginGet);
-  app.post("/login", auth.loginPost)
+  app.post("/login", auth.loginPost);
+  app.get("/logout", auth.logoutGet)
   app.get("*", notFound);
 
   app.listen(3000, () => console.log("App is listening on port 3000"));
