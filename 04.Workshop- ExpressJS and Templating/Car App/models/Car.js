@@ -6,7 +6,8 @@ const carSchema = new Schema({
   imageUrl: { type: String, default: "" },
   price: { type: Number, required: true, min: 0 },
   accessories:{ type: [ObjectId], default:[], ref: "Accessory"},
-  isDeleted: {type: Boolean, default: false}
+  isDeleted: {type: Boolean, default: false},
+  owner: {type: ObjectId, ref: "User"}
 });
 
 const Car = model("Car", carSchema);

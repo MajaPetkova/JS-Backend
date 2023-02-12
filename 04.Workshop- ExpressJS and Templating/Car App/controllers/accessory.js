@@ -11,6 +11,7 @@ module.exports = {
       description: req.body.description,
       imageUrl: req.body.imageUrl,
       price: Number(req.body.price),
+      owner: req.session.user.id
     };
     // console.log(accessory);
     try{
