@@ -78,7 +78,7 @@ async function start() {
     body("password").trim(),
     body("repeatPassword").trim(),
     body("username")
-      .isLength({ min: 3, max: 20 })
+      .isLength({ min: 3 })
       .withMessage("Username must be at least 3 Characters long")
       .bail()
       .isAlphanumeric()

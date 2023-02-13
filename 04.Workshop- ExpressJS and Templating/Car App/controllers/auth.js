@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator");
+ const { validationResult } = require("express-validator");
 
   module.exports = {
   registerGet(req, res) {
@@ -13,7 +13,7 @@ const { validationResult } = require("express-validator");
     // if (req.body.password != req.body.repeatPassword) {
     //   return res.redirect("/register");
     // }
-    try {
+        try {
       if(errors.length > 0){
         throw errors;
       }
