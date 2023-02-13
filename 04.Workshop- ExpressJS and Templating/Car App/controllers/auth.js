@@ -22,7 +22,7 @@
       res.redirect("/");
     } catch (errors) {
       console.error(errors);
-      res.render("register",{ title: "Register" , errors, data:{username: req.body.username} });
+         res.render("register",{ title: "Register" , errors, data:{username: req.body.username} });
     }
   },
   loginGet(req, res) {
@@ -33,8 +33,9 @@
       await req.auth.login(req.body.username, req.body.password)
       res.redirect("/");
     } catch (err) {
+      res.locals.errors= [{msg: err.message}]
       console.error(err.message);
-      res.redirect("/login");
+      res.render("login", { title: "Login"} );
     }
 
   },

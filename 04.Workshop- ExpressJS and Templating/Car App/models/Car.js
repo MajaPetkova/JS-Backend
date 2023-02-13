@@ -7,7 +7,6 @@ const {
 const carSchema = new Schema({
   name: {
     type: String,
-    // required: [true, "Listing name is required"],
     minlength: [3, "Car listing name must be at least 3 characters long"]
   },
   description: { type: String, default: "" },
