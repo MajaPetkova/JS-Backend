@@ -74,16 +74,25 @@ async function start() {
   app.get("/register", auth.registerGet);
   app.post(
     "/register",
+    body("username").trim().toLowerCase(),
+    body("password").trim(),
+    body("repeatPassword").trim(),
     body("username")
       .isLength({ min: 3, max: 20 })
-      .withMessage("Username must be at least 3 Characters long").bail()
-      .isAlphanumeric().withMessage("Username must contain only letters and numbers").bail(),
+      .withMessage("Username must be at least 3 Characters long")
+      .bail()
+      .isAlphanumeric()
+      .withMessage("Username must contain only letters and numbers")
+      .bail(),
     body("password")
       .notEmpty()
       .withMessage("Password is required")
       .isLength({ min: 4 })
       .withMessage("Password must be at least 4 Characters long"),
-      body("repeatPassword").custom((value, {req})=> value== req.body.password).withMessage("Passwords don\'t match"),
+    body("repeatPassword")
+      .trim()
+      .custom((value, { req }) => value == req.body.password)
+      .withMessage("Passwords don't match"),
     auth.registerPost
   );
   app.get("/login", auth.loginGet);
