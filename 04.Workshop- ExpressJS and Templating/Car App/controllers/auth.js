@@ -20,9 +20,9 @@ const { validationResult } = require("express-validator");
       await req.auth.register(req.body.username, req.body.password);
       //  console.log(req.body)
       res.redirect("/");
-    } catch (err) {
-      console.error(err);
-      res.redirect("/register");
+    } catch (errors) {
+      console.error(errors);
+      res.render("register",{ title: "Register" , errors, data:{username: req.body.username} });
     }
   },
   loginGet(req, res) {
