@@ -4,7 +4,7 @@ const mapErrors = require("../util/mapper");
 const router = require("express").Router();
 
 router.get("/register", isGuest(), (req, res) => {
-  res.render("register");
+  res.render("register", {title: "Register Page"});
 });
 
 // TODO check form actions methods field names
@@ -25,7 +25,7 @@ router.post("/register",isGuest(), async (req, res) => {
 });
 
 router.get("/login",isGuest(), (req, res) => {
-  res.render("login");
+  res.render("login" , {title: "Login Page"});
 });
 
 // TODO check form actions methods field names
