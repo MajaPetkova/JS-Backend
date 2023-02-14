@@ -1,4 +1,4 @@
-const { getAllBooks } = require("../services/bookService");
+const { getAllBooks, getBookById } = require("../services/bookService");
 const { bookViewModel } = require("../util/mapper");
 
 const router = require("express").Router();
@@ -13,5 +13,13 @@ router.get("/catalog", async (req, res) => {
 
   res.render("catalog", { title: "Catalog Page", books });
 });
+
+
+router.get("/details/:id", async(req, res) => {
+    const id= req.params.id;
+    const book= bookViewModel(await getBookById(id));
+    // console.log(book)
+    res.render("details", { title: "Details Page", book});
+  });
 
 module.exports = router;

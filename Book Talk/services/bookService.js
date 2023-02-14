@@ -10,8 +10,12 @@ async function getAllBooks() {
   return Book.find({});
 
 };
+async function getBookById(id){
+  return Book.findById(id).populate("wishingList")
+}
 
 module.exports = {
   createBook,
   getAllBooks,
+  getBookById
 };
