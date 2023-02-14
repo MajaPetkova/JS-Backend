@@ -28,14 +28,14 @@ async function login(username, password) {
   const hasMatch= await compare(password, user.hashedPassword);
 
   if(!hasMatch){
-    throw new Error("Incorrect password");
+    throw new Error("Incorrect username or password");
   };
   return user;
 }
 
 // TODO identify user by given identifier
 async function getUserByUserName(username) {
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username : new RegExp(`^${username}$`, "i") });
   return user;
 }
 
