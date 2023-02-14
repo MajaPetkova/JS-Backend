@@ -1,6 +1,6 @@
 const { isUser } = require("../middleware/guards");
 const { createBook } = require("../services/bookService");
-const mapErrors = require("../util/mapper");
+const {mapErrors} = require("../util/mapper");
 
 const router = require("express").Router();
 

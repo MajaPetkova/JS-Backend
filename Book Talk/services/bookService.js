@@ -4,13 +4,14 @@ async function createBook(book) {
   const result = new Book(book);
   await result.save();
   return result;
-}
+};
 
-async function getAllBooks(){
-    await Book.find({});
+async function getAllBooks() {
+  return Book.find({});
 
-}
-module.exports= {
-    getAllBooks,
-    createBook
-}
+};
+
+module.exports = {
+  createBook,
+  getAllBooks,
+};
