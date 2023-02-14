@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("../models/User");
 
 // TODO: Change database name
 const dbName = "BookTalk";
@@ -10,6 +11,7 @@ module.exports = async (app) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    
     console.log("Database connected");
     
     mongoose.connection.on("error", (err) => {
