@@ -5,3 +5,12 @@ async function createBook(book) {
   await result.save();
   return result;
 }
+
+async function getAllBooks(){
+    await Book.find({});
+
+}
+module.exports= {
+    getAllBooks,
+    createBook
+}
