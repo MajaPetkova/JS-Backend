@@ -11,14 +11,6 @@
 
    <body>
     <header class="header">
-
-   {{#if errors}}
-      <div>
-        {{#each errors}}
-          <p>{{msg}}</p>
-        {{/each}}
-      </div>
-    {{/if}}
       <div class="header">
             <nav class="navbar">
                 <a href="/">Home</a>
@@ -36,7 +28,19 @@
             </nav>
         </div>
 
+
     </header>
+   {{#if errors}}
+      <div>
+        <div class="errorContainer">
+        {{#each errors}}
+          <p>{{msg}}</p>
+        {{/each}}
+        </div>
+      </div>
+    {{/if}}
+      
+ 
     <main>
         {{{body}}}
     </main>
