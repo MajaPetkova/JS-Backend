@@ -14,6 +14,9 @@ async function getBookById(id){
   return Book.findById(id).populate("owner")
 }
 
+async function getMyBooks(userId){
+return Book.find({owner: userId}).populate("owner")
+}
 async function updateBook(id, book){
 const existing = await Book.findById(id);
 
@@ -42,6 +45,7 @@ module.exports = {
   createBook,
   getAllBooks,
   getBookById,
+  getMyBooks,
   updateBook,
   deleteBookById,
   wishBook

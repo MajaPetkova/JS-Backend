@@ -20,12 +20,20 @@ function bookViewModel(book) {
     image: book.image,
     review: book.review,
     wishingList: book.wishingList,
-    owner: book.owner
+    owner: ownerViewModel(book.owner)
   };
+}
+
+function ownerViewModel(user){
+return{
+  _id: user.id,
+  email: user.email
+}
+
 }
 
 module.exports ={
   mapErrors,
-  bookViewModel
-
+  bookViewModel,
+ownerViewModel
 } 

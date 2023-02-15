@@ -1,4 +1,5 @@
-const { getAllBooks, getBookById } = require("../services/bookService");
+const { isUser } = require("../middleware/guards");
+const { getAllBooks, getBookById, getMyBooks } = require("../services/bookService");
 const { bookViewModel } = require("../util/mapper");
 
 const router = require("express").Router();
@@ -33,5 +34,9 @@ router.get("/details/:id", async(req, res) => {
     res.render("details", { title: "Details Page", book});
   });
 
-
+router.get("/profile",isUser(),  async(req, res)=>{
+const books= (await getMyBooks(req.session.user._id)).map(bookViewModel);
+console.log(books)
+res.render("profile", {title: "My Profile", books})
+})
 module.exports = router;
