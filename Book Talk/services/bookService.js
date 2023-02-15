@@ -30,10 +30,19 @@ await existing.save();
 async function deleteBookById(id){
   return Book.findByIdAndDelete(id)
 }
+async function wishBook(bookId, userId){
+const book= await Book.findById(bookId);
+ if(book.wishingList.includes(userId)){
+  throw new Error("User has already wished to read this book")
+ }
+ book.wishingList.push(userId);
+   await book.save()
+}
 module.exports = {
   createBook,
   getAllBooks,
   getBookById,
   updateBook,
-  deleteBookById
+  deleteBookById,
+  wishBook
 };
