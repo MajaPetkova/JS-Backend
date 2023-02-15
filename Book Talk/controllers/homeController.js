@@ -21,12 +21,12 @@ router.get("/details/:id", async(req, res) => {
 
    if(req.session.user ){
     book.hasUser = true;
-    // book.isOwner= req.session.user._id == book.owner;
-    if( req.session.user._id == book.owner._id){
-        // console.log(book.owner)
-        // console.log(true)
-        book.hasOwner = true;
-       }
+//    if() req.session.user._id == book.owner;
+    // if( req.session.user._id == book.owner._id){
+    //     console.log(book.owner)
+    //     console.log(true)
+    //     book.isOwner = true;
+    //    }
        // TODO check wishlist
    }
     res.render("details", { title: "Details Page", book});

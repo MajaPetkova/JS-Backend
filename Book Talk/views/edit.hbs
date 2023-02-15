@@ -1,6 +1,6 @@
     <section class="edit-form-container">
 
-        <form action="/edit/{{_id}}" method="POST">
+        <form action="/edit/{{book._id}}" method="POST">
             <h3>Edit Book Review</h3>
             <label>Title</label>
             <input type="text" name="title" class="box" value="{{book.title}}" id="title">
@@ -10,8 +10,8 @@
             <input type="text" name="genre" class="box" value="{{book.genre}}" id="">
             <label>Stars</label>
             <input type="number" name="stars" class="box" value="{{book.stars}}" id="">
-            <label>Image</label>image
-            <input type="text" name="" class="box" value="{{book.image}}" id="">
+            <label>Image</label>
+            <input type="text" name="image" class="box" value="{{book.image}}" id="">
             <label>Review</label>
             <textarea class="box"
                 name="review">{{book.review}}</textarea>

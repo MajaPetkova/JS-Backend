@@ -1,6 +1,6 @@
 const { Schema, model, Types:{ObjectId}} = require("mongoose");
 
-const URL_PATTERN= /^https?:\/\/(.+)/gm;
+const URL_PATTERN= /^https?:\/\/(.+)/g;
 
 const bookSchema = new Schema({
 title: {type: String, minLength:[2, "Title must be at least 2 characters long"]},
