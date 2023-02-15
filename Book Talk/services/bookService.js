@@ -11,7 +11,7 @@ async function getAllBooks() {
 
 };
 async function getBookById(id){
-  return Book.findById(id).populate("wishingList")
+  return Book.findById(id).populate("_id")
 }
 
 module.exports = {

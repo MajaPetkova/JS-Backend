@@ -18,8 +18,19 @@ router.get("/catalog", async (req, res) => {
 router.get("/details/:id", async(req, res) => {
     const id= req.params.id;
     const book= bookViewModel(await getBookById(id));
-    // console.log(book)
+
+   if(req.session.user ){
+    book.hasUser = true;
+    // book.isOwner= req.session.user._id == book.owner;
+    if( req.session.user._id == book.owner._id){
+        // console.log(book.owner)
+        // console.log(true)
+        book.hasOwner = true;
+       }
+       // TODO check wishlist
+   }
     res.render("details", { title: "Details Page", book});
   });
+
 
 module.exports = router;
