@@ -23,12 +23,10 @@ router.get("/details/:id", async(req, res) => {
    if(req.session.user ){
     book.hasUser = true;
 
-    // if( req.session.user._id == book.owner._id){
-    //     console.log(book.owner)
-    //     console.log(true)
-    //     book.isOwner = true;
-    //  }
-   const hasWish= book.wishingList.includes(req.session.user._id)
+    if( req.session.user._id == book.owner._id){
+          book.isOwner = true;
+     }
+   const hasWish= book.wishingList.find(x=> x._id == req.session.user._id) != undefined
     console.log(hasWish)
    }
     res.render("details", { title: "Details Page", book});

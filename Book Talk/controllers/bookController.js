@@ -75,9 +75,9 @@ router.get("/delete/:id", isUser(), async (req, res) => {
   const id = req.params.id; //book
   const existing = bookViewModel(await getBookById(id));
 
-  //   if( req.session.user._id != existing.owner._id){
-  //   res.redirect("/login")
-  //    }
+    if( req.session.user._id != existing.owner._id){
+    res.redirect("/login")
+     }
   try {
     await deleteBookById(id);
     res.redirect("/catalog");

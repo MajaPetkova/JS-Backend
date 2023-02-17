@@ -11,7 +11,7 @@ async function getAllBooks() {
 
 };
 async function getBookById(id){
-  return Book.findById(id).populate("owner")
+  return Book.findById(id).populate("owner", "_id")
 }
 
 async function getMyBooks(userId){
