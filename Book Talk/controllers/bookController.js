@@ -75,9 +75,9 @@ router.get("/delete/:id", isUser(), async (req, res) => {
   const id = req.params.id; //book
   const existing = bookViewModel(await getBookById(id));
 
-    if( req.session.user._id != existing.owner._id){
+  if (req.session.user._id != existing.owner._id) {
     res.redirect("/login")
-     }
+  }
   try {
     await deleteBookById(id);
     res.redirect("/catalog");
@@ -88,16 +88,16 @@ router.get("/delete/:id", isUser(), async (req, res) => {
   }
 });
 
-router.get("/wish/:id", isUser(), async(req, res) => {
-    const id = req.params.id;
-    try {
+router.get("/wish/:id", isUser(), async (req, res) => {
+  const id = req.params.id;
+  try {
     await wishBook(id, req.session.user._id)
-      res.redirect("/catalog");
-    } catch (err) {
-      console.error(err);
-      const errors = mapErrors(err);
-      res.render("details", { title: "Details Page", errors });
-    }
-  });
+    res.redirect("/catalog");
+  } catch (err) {
+    console.error(err);
+    const errors = mapErrors(err);
+    res.render("details", { title: "Details Page", errors });
+  }
+});
 
 module.exports = router;
