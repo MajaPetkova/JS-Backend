@@ -7,11 +7,23 @@ start()
 async function start(){
 
     const app = express();
+
     app.engine(".hbs", handlebars({
       extname: ".hbs"
     }).engine);
-    app.set("view engine", ".hbs")
-    app.use("/static", express.static("static"))
+    app.set("view engine", ".hbs");
+
+    app.use("/static", express.static("static"));
+    app.use(session({
+        secret: "jhfdjhdkdsecreet",
+        resave: false,
+        saveUninitialized:true,
+        cookie: {
+            secure: false
+        }
+    }));
+
+
     app.get("/", (req, res)=>{
         res.render("home", {layout: false})
     })
