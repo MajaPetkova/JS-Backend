@@ -30,7 +30,7 @@ async function login(username, password) {
 }
 
 async function getUserByUsername(username) {
-  const user = User.find({ username });
+  const user = User.findOne({ username });
 
   return user;
 }
