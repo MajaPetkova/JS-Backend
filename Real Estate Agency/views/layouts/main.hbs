@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- Do not forget to change the path to the css file -->
-    <title>Home Page</title>
+    <title>{{title}}</title>
     <link href="./static/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
@@ -25,14 +25,14 @@
             <a href="/">Home</a>
             <ul>
                 <!-- Guest users and Logged users -->
-                <li><a href="#">Housing for rent</a></li>
+                <li><a href="/catalog">Housing for rent</a></li>
                 <!-- Guest users -->
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
                 <!-- Logged users -->
-                <li><a href="#">Create offer</a></li>
-                <li><a href="#">Search</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="/create">Create offer</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
 

@@ -1,6 +1,7 @@
-const { register, login } = require("../services/authService");
-
 const router = require("express").Router();
+const { register, login } = require("../services/authService");
+const mapError = require("../views/layouts/mapper");
+
 
 router.get("/register", (req, res) => {
   res.render("register");
@@ -8,16 +9,18 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
+    if(req.body)
     if (req.body.password != req.body.repass) {
       throw new Error("Passwords don't match");
     }
     const user = await register(req.body.username, req.body.password);
-    console.log(user);
+    // console.log(user);
     req.session.user = user;
     res.redirect("/");
   } catch (err) {
     console.error(err);
-    res.render("register", { data: { username: req.body.username } });
+    const errors= mapError(err)
+    res.render("register", { data: { username: req.body.username }, errors });
   }
 });
 
@@ -32,7 +35,8 @@ router.post("/login", async (req, res) => {
     res.redirect("/");
   } catch (err) {
     console.error(err);
-    res.render("/login", { data: { username: req.body.username } });
+    const errors= mapError(err)
+    res.render("/login", { data: { username: req.body.username }, errors });
   }
 });
 
