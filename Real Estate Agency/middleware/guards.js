@@ -21,10 +21,10 @@ function isGuest() {
 function isOwner() {
   return function (req, res, next) {
     const userId = req.session.user?._id;
-    if (res.locals.data.owner == userId) {
+    if (res.locals.housing.owner == userId) {
       next();
     } else {
-      res.redirect("/login")
+      res.redirect("/login");
     }
   };
 }
@@ -32,5 +32,5 @@ function isOwner() {
 module.exports = {
   isUser,
   isGuest,
-  isOwner
+  isOwner,
 };
