@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 require("../models/User");
+require("../models/Housing");
 
 
 const dbName = "realEstate";
