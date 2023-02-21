@@ -9,18 +9,20 @@ router.get("/register", isGuest(), (req, res) => {
 
 router.post("/register", isGuest(), async (req, res) => {
   try {
-    if (req.body)
+    if (req.body.password.trim() == ""){
+        throw new Error("Password is required");
+    }
       if (req.body.password != req.body.repass) {
         throw new Error("Passwords don't match");
       }
-    const user = await register(req.body.username, req.body.password);
+    const user = await register(req.body.name, req.body.username, req.body.password);
     // console.log(user);
     req.session.user = user;
     res.redirect("/");
   } catch (err) {
     console.error(err);
     const errors = mapError(err);
-    res.render("register", { data: { username: req.body.username }, errors });
+    res.render("register", { data: { username: req.body.username, name:req.body.name }, errors });
   }
 });
 
@@ -36,7 +38,7 @@ router.post("/login", isGuest(), async (req, res) => {
   } catch (err) {
     console.error(err);
     const errors = mapError(err);
-    res.render("/login", { data: { username: req.body.username }, errors });
+    res.render("login", { data: { username: req.body.username }, errors });
   }
 });
 

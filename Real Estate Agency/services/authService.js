@@ -1,13 +1,14 @@
 const User = require("../models/User");
 const { hash, compare } = require("bcrypt");
 
-async function register(username, password) {
+async function register(name, username, password) {
   const existing = await getUserByUsername(username);
   if (existing) {
     throw new Error("Username is taken");
   }
   const hashedPassword = await hash(password, 10);
   const user = new User({
+    name,
     username,
     hashedPassword,
   });
