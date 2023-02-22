@@ -1,19 +1,16 @@
-const Housing= require("../models/Housing");
+const Housing = require("../models/Housing");
 
-
-async function getHousingById(id){
- const housing = await Housing.findById(id);
- return housing;
+async function getHousingById(id) {
+  const housing = await Housing.findById(id);
+  return housing;
 }
 
-async function createHousing(housing){
- const result= await Housing.create();
-//  const result=new Housing(housing);
-// await housing.save()
+async function createHousing(housing) {
+  const result = new Housing(housing);
+  await result.save();
 }
 
-
-module.exports= {
-    getHousingById,
-    createHousing,
-}
+module.exports = {
+  getHousingById,
+  createHousing,
+};
