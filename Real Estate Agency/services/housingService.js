@@ -1,5 +1,10 @@
 const Housing = require("../models/Housing");
 
+
+async function getAllHousings(){
+ return await Housing.find({}).lean();
+  
+}
 async function getHousingById(id) {
   const housing = await Housing.findById(id);
   return housing;
@@ -11,6 +16,7 @@ async function createHousing(housing) {
 }
 
 module.exports = {
+  getAllHousings,
   getHousingById,
   createHousing,
 };

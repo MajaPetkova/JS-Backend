@@ -12,7 +12,10 @@
 
             <section id="top-houses">
                 <h1>Top Houses</h1>
-                <div class="houses">
+                {{#each housings}}
+                     {{> housePreview}}
+                {{/each}}
+                {{!-- <div class="houses">
 
 
                     <div class="card-home">
@@ -34,7 +37,7 @@
                         <div class="cta-container"><a href="#" class="details-link">Details</a></div>
                         <div class="card_image"><img src="./static/images/apartments.jpg"></div>
 
-                    </div>
+                    </div> --}}
 
                     <!-- If there are still no offers for housing in the database display: -->
                     <!--<div class="no-data-container">
