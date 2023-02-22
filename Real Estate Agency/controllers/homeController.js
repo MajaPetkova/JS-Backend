@@ -1,6 +1,7 @@
+const router = require("express").Router();
+const preload = require("../middleware/preload");
 const { getAllHousings } = require("../services/housingService");
 
-const router = require("express").Router();
 
 router.get("/", async (req, res) => {
     const housings =  (await getAllHousings()).sort((a,b)=> a.year - b.year)
@@ -9,10 +10,11 @@ router.get("/", async (req, res) => {
 
 router.get("/catalog", async(req, res) => {
    const housings = await getAllHousings()
-   console.log(housings)
   res.render("catalog", { title: "Catalog",  housings });
 });
 
-
+router.get("/details/:id",preload(), (req, res) => {
+    res.render("details", { title: "Details Page"});
+});
 
 module.exports = router;
