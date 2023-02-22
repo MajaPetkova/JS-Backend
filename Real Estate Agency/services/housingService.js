@@ -6,8 +6,11 @@ async function getAllHousings(){
   
 }
 async function getHousingById(id) {
-  const housing = await Housing.findById(id);
-  return housing;
+return await Housing.findById(id);
+
+}
+async function getHousingAndUsers(id) {
+return  await Housing.findById(id).populate("owner").populate("rentedHome").lean();
 }
 
 async function createHousing(housing) {
@@ -18,5 +21,6 @@ async function createHousing(housing) {
 module.exports = {
   getAllHousings,
   getHousingById,
+  getHousingAndUsers,
   createHousing,
 };

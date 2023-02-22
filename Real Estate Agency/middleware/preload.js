@@ -1,10 +1,13 @@
 const housingService = require("../services/housingService");
 
-function preload() {
+function preload(populate) {
   return async function (req, res, next) {
     const id = req.params.id;
-    const housing = await housingService.getHousingById(id);
-    res.locals.housing = housing;
+    if (populate) {
+      res.locals.housing = await housingService.getHousingAndUsers(id);
+    } else {
+      res.locals.housing = await housingService.getHousingById(id);
+    }
     next();
   };
 }
