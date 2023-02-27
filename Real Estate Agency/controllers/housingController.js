@@ -1,7 +1,11 @@
 const router = require("express").Router();
 const { isUser, isOwner } = require("../middleware/guards");
 const preload = require("../middleware/preload");
-const { createHousing, updateHousing } = require("../services/housingService");
+const {
+  createHousing,
+  updateHousing,
+  deleteHousingById,
+} = require("../services/housingService");
 const mapError = require("../util/mapper");
 
 router.get("/create", isUser(), (req, res) => {
@@ -48,9 +52,8 @@ router.post("/edit/:id", preload(), isOwner(), async (req, res) => {
   };
 
   try {
-    await updateHousing(id, housing );
+    await updateHousing(id, housing);
     res.redirect("/details/" + id);
-   
   } catch (err) {
     console.error(err);
     const errors = mapError(err);
@@ -59,4 +62,8 @@ router.post("/edit/:id", preload(), isOwner(), async (req, res) => {
   }
 });
 
+router.get("/delete/:id", preload(), isOwner(), async (req, res) => {
+  await deleteHousingById(req.params.id);
+  res.redirect("/catalog");
+});
 module.exports = router;

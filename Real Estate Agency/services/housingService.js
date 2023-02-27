@@ -32,10 +32,15 @@ async function updateHousing(id, housing) {
   await existing.save();
 }
 
+async function deleteHousingById(id){
+  await Housing.findByIdAndDelete(id)
+}
+
 module.exports = {
   getAllHousings,
   getHousingById,
   getHousingAndUsers,
   createHousing,
-  updateHousing
+  updateHousing,
+  deleteHousingById
 };
