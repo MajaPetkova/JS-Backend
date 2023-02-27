@@ -6,7 +6,7 @@ async function getAllHousings(){
   
 }
 async function getHousingById(id) {
-return await Housing.findById(id);
+return await Housing.findById(id).lean();
 
 }
 async function getHousingAndUsers(id) {
