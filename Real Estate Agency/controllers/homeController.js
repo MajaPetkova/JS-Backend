@@ -18,7 +18,7 @@ router.get("/details/:id", preload(true), (req, res) => {
     res.locals.housing.isOwner = req.session.user._id == res.locals.housing.owner._id;
 }
 
-  console.log(res.locals.housing);
+  // console.log(res.locals.housing);
   res.render("details", { title: "Details Page"});
 });
 
