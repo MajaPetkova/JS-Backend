@@ -13,13 +13,18 @@ router.get("/catalog", async (req, res) => {
 });
 
 router.get("/details/:id", preload(true), (req, res) => {
+  const housing= res.locals.housing;
+ housing.availableHousing = housing.availablePieces - housing.rentedHome.length;
   if (req.session.user) {
-    res.locals.housing.hasUser = true;
-    res.locals.housing.isOwner = req.session.user._id == res.locals.housing.owner._id;
-}
+   housing.hasUser = true;
+   housing.isOwner =  req.session.user._id ==housing.owner._id;
 
+      if(housing.rentedHome.some(x=> x._id == req.session.user._id) ){
+          housing.isRented = true;
+      }
+  }
   // console.log(res.locals.housing);
-  res.render("details", { title: "Details Page"});
+  res.render("details", { title: "Details Page" });
 });
 
 module.exports = router;

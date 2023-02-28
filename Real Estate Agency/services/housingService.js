@@ -36,11 +36,21 @@ async function deleteHousingById(id){
   await Housing.findByIdAndDelete(id)
 }
 
+async function rentingHome(houseId, userId ){
+const housing= await Housing.findById(houseId);
+    if(housing.rentedHome.includes(userId)){
+      throw new Error("User is already rented this home")
+    }
+    housing.rentedHome.push(userId);
+    await housing.save();
+}
+
 module.exports = {
   getAllHousings,
   getHousingById,
   getHousingAndUsers,
   createHousing,
   updateHousing,
-  deleteHousingById
+  deleteHousingById,
+  rentingHome
 };

@@ -13,7 +13,7 @@
                                 <h4>City: {{housing.city}}</h4>
                                 <p>Description: {{housing.description}}.</p>
                             <!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
-                                <p>People rented this housing: {{housing.rentedHome}}</p>
+                                <p>People rented this housing: {{housing.rentedHome.length}}</p>
 
                                 <!-- If not display: -->
                                 <p>People rented this housing: There are no tenants yet.</p>
@@ -30,12 +30,18 @@
                             <a href="/delete/{{housing._id}}" class="remove">Delete</a>
                             {{else}}
                             <!-- logged in user with available pieces-->
-                            <a href="#" class="rentHome">Rent a home, available 2 housing</a>
+                            {{#if housing.isRented}}
                             <p class="alRentHome">You have already rent this home</p>
+                            {{else}}
+                            {{#if housing.availableHousing }}
+                            <a href="/rent/{{housing._id}}" class="rentHome">Rent a home, available {{housing.availableHousing}} housing</a>
+                            {{else}}
+                            <p class="no-housing">No Housing Available!</p>
+                            {{/if}}
+                            {{/if}}
                               {{/if}}
                                     {{/if}}
                             <!-- logged in user with no available pieces-->
-                            <p class="no-housing">No Housing Available!</p>
                         </div>
                     </div>
                 </div>

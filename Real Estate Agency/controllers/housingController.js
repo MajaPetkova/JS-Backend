@@ -5,6 +5,7 @@ const {
   createHousing,
   updateHousing,
   deleteHousingById,
+  rentingHome,
 } = require("../services/housingService");
 const mapError = require("../util/mapper");
 
@@ -66,4 +67,20 @@ router.get("/delete/:id", preload(), isOwner(), async (req, res) => {
   await deleteHousingById(req.params.id);
   res.redirect("/catalog");
 });
+
+router.get("/rent/:id",isUser(),  async (req, res) => {
+  const id= req.params.id;
+
+  try{
+   await rentingHome(id, req.session.user._id)
+  }catch(err){
+    console.error(err);
+    const errors = mapError(err);
+  }finally{
+    res.redirect("/details/" + id);
+  }
+});
+
+
+
 module.exports = router;
