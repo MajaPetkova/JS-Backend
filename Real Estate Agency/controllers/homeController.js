@@ -15,6 +15,8 @@ router.get("/catalog", async (req, res) => {
 router.get("/details/:id", preload(true), (req, res) => {
   const housing= res.locals.housing;
  housing.availableHousing = housing.availablePieces - housing.rentedHome.length;
+ housing.rentingList= housing.rentedHome.map(x=> x.username).join(", ");
+
   if (req.session.user) {
    housing.hasUser = true;
    housing.isOwner =  req.session.user._id ==housing.owner._id;

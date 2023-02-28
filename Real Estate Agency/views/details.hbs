@@ -14,8 +14,14 @@
                                 <p>Description: {{housing.description}}.</p>
                             <!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
                                 <p>People rented this housing: {{housing.rentedHome.length}}</p>
+                                <p>
+                                {{#if housing.rentingList}}
+                                {{housing.rentingList}}
+                                {{else}}
                                 <!-- If not display: -->
-                                <p>People rented this housing: There are no tenants yet.</p>
+                                People rented this housing: There are no tenants yet.
+                                {{/if}}
+                                </p>
                             </div>
                         </div>
 
