@@ -3,6 +3,9 @@ const Housing = require("../models/Housing");
 async function getAllHousings() {
   return await Housing.find({}).lean();
 }
+async function getAllHousingsSearch(search) {
+  return await Housing.find({name: { $regex: new RegExp(search, 'i') }}).lean();
+}
 async function getHousingById(id) {
   return await Housing.findById(id).lean();
 }
@@ -52,5 +55,6 @@ module.exports = {
   createHousing,
   updateHousing,
   deleteHousingById,
-  rentingHome
+  rentingHome,
+  getAllHousingsSearch
 };

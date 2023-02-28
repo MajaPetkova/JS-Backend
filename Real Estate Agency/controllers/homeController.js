@@ -1,6 +1,7 @@
 const router = require("express").Router();
+const { isUser } = require("../middleware/guards");
 const preload = require("../middleware/preload");
-const { getAllHousings } = require("../services/housingService");
+const { getAllHousings, getAllHousingsSearch } = require("../services/housingService");
 
 router.get("/", async (req, res) => {
   const housings = (await getAllHousings()).sort((a, b) => a.year - b.year);
@@ -27,6 +28,13 @@ router.get("/details/:id", preload(true), (req, res) => {
   }
   // console.log(res.locals.housing);
   res.render("details", { title: "Details Page" });
+});
+
+
+router.get("/search",isUser(), async (req, res) => {
+  const query= req.params
+  const housings= await getAllHousingsSearch(query)
+  res.render("search", { title: "Search Page", housings});
 });
 
 module.exports = router;
