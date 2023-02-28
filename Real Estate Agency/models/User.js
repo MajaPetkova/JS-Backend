@@ -9,8 +9,8 @@ const userSchema = new Schema({
     },
     message: "Name must contains First and Last name"
   }},
-  username: { type: String, required: true,minLength:[5, "Username must be 5 letters long"]  },
-  hashedPassword: { type: String, required: true },
+  username: { type: String, required: true, minLength:[5, "Username must be 5 letters long"]  },
+  hashedPassword: { type: String, required: true},
 });
 userSchema.index(
   { username: 1 },
