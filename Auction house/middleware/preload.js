@@ -1,7 +1,7 @@
 //TODO replace with actual service;
 const auctionService = require("../services/auctionService");
 
-function preload() {
+function preload(populate) {
     return async function(req, res, next) {
         const id = req.params.id;
 
