@@ -10,7 +10,7 @@ const auctionSchema = new Schema({
   category: { type: String, required: true },
   image: { type: String, required: true },
   price: { type: Number, required: true },
-  owner: { type: ObjectId, required: true, ref: "User" },
+  owner: { type: ObjectId, ref: 'User', required: true },
   bidder: { type: [ObjectId], ref: "User", default: [] },
 });
 
