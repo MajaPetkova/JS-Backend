@@ -1,17 +1,24 @@
-const Auction  = require("../models/Auction");
+const Auction = require("../models/Auction");
 
-async function getAllAuctions(){
-    return Auction.find({}).lean();
+async function getAllAuctions() {
+  return Auction.find({}).lean();
 }
-async function getAuctionById(id){
-    return Auction.findById(id).lean();
+async function getAuctionById(id) {
+  return Auction.findById(id).lean();
 }
-async function createAuction (auction){
-    const result= new Auction(auction);
-    await result.save();
+async function getAuctionAndUsers(auctionId, userId) {
+  return Auction.findById(auctionId)
+    .populate("owner")
+    .populate("bidder")
+    .lean();
 }
-module.exports= {
-    getAllAuctions,
-    getAuctionById,
-    createAuction
+async function createAuction(auction) {
+  const result = new Auction(auction);
+  await result.save();
+}
+module.exports = {
+  getAllAuctions,
+  getAuctionById,
+  createAuction,
+  getAuctionAndUsers
 };
