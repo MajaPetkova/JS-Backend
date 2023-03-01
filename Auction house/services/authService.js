@@ -10,7 +10,7 @@ async function register(email, firstName, lastName, password) {
 
   const hashedPassword = await hash(password, 10);
   const user = new User({
-    email,
+    email, 
     firstName,
     lastName,
     hashedPassword,

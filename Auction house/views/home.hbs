@@ -1,65 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/site.css">
-    <title>Auction House</title>
-</head>
-
-<body>
-
-    <div id="page-content">
-
-        <header>
-            <a href="/" class="title-logo">
-                <img src="/static/assets/logo.png">
-                <span>Auction House</span>
-            </a>
-            <nav class="main-nav nav-mid">
-                <ul>
-                    <li>
-                        <a href="#">Browse</a>
-                    </li>
-                    <!-- User actions -->
-                    <li class="user">
-                        <a href="#">Publish</a>
-                    </li>
-
-                    <!-- Bonus action -->
-                    <!--
-                    <li class="user">
-                        <a href="#">Closed Auctions</a>
-                    </li>
-                    -->
-
-                    <li class="user">
-                        <a href="#">Logout</a>
-                    </li>
-                    <!-- Guest actions -->
-                    <li class="guest">
-                        <a href="#">Register</a>
-                    </li>
-                    <li class="guest">
-                        <a href="#">Login</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-
-        <main>
-
-            <!-- In case of error, display the following div-->
-            <!--
-
-            <div class="error-box">
-                <p>Show each error in a separate paragraph</p>
-            </div>
-
-            -->
-
-            <!-- Home Page -->
             <section id="catalog-section">
 
                 <h1 class="item">Home</h1>
@@ -79,8 +18,8 @@
                             </p>
 
                             <div class="align-center">
-                                <a class="action" href="#">Browse Listings</a>
-                                <a class="action" href="#">Publish Auction</a>
+                                <a class="action" href="/catalog">Browse Listings</a>
+                                <a class="action" href="/create">Publish Auction</a>
                             </div>
                         </div>
                     </div>
@@ -89,11 +28,4 @@
 
             </section>
 
-        </main>
-
-        <footer>SoftUni &copy; 2022 | Design by Viktor Kostadinov</footer>
-    </div>
-
-</body>
-
-</html>
+       

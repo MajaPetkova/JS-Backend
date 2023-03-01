@@ -21,7 +21,6 @@ router.post("/register",isGuest(), async (req, res) => {
     res.redirect("/");
   } catch (err) {
     console.error(err);
-     // TODO Send error messages
      const errors= mapErrors(err)
     res.render("register", { data: {email:req.body.email, firstName:req.body.firstName, lastName:req.body.lastName }, errors});
   }
@@ -32,7 +31,7 @@ router.get("/login",isGuest(), (req, res) => {
 });
 
 router.post("/login",isGuest(), async (req, res) => {
-  console.log(req.body.email, req.body.password)
+  // console.log(req.body.email, req.body.password)
   try {
     const user = await login(req.body.email, req.body.password);
 
