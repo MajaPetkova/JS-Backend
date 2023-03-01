@@ -1,10 +1,16 @@
 const { Schema, model } = require("mongoose");
+const EMAIL_PATTERN= /^([a-zA-Z]+)@([a-zA-Z]+)\.([a-zA-Z]+)$/;
 
-// TODO add validation
+
 const userSchema = new Schema({
-  email: { type: String, required: true },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  email: { type: String, required: true, validate: {
+    validator(value){
+    return EMAIL_PATTERN.test(value)
+    },
+    message: "Email must be valid"
+  } },
+  firstName: { type: String, required: true, minLength: [1, "First name must be at least 1 character long"] },
+  lastName: { type: String, required: true,  minLength: [1, "Last name must be at least 1 character long"] },
   hashedPassword: { type: String, required: true },
 });
 

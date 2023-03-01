@@ -10,7 +10,7 @@ router.get("/register", isGuest(), (req, res) => {
 
 router.post("/register",isGuest(), async (req, res) => {
   try {
-    if(req.body.password.trim() == ""){
+    if(req.body.password.trim().length < 5){
       throw new Error("Password is required!");
     }
     if (req.body.password != req.body.repass) {

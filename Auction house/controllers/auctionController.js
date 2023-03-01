@@ -17,7 +17,7 @@ router.post("/create", isUser(), async (req, res) => {
     owner: req.session.user._id,
   };
 
-  console.log(auction);
+  // console.log(auction);
   try {
     await createAuction(auction);
     res.redirect("/");

@@ -16,6 +16,7 @@ router.get("/catalog", async (req, res) => {
 
 router.get("/details/:id", preload(true), (req, res) => {
   // console.log(res.locals.auction);
+  // res.locals.auction.amount= (res.locals.auction.amount - res.locals.auction.price) > 0;
   if(req.session.user){
     res.locals.auction.hasUser= true;
     res.locals.auction.isOwner = req.session.user._id == res.locals.auction.owner._id ;

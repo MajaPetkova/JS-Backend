@@ -32,10 +32,10 @@
 
          {{#if auction.hasUser}}
           <!-- If current user can place a bid -->
-          <form class="vertical" method="post" action="#">
+          <form class="vertical" method="POST" action="/bidding/{{auction._id}}">
             <label><span>Bid amount</span><input
                 type="number"
-                name=""
+                name="amount"
               /></label>
             <input class="action" type="submit" value="Place bid" />
           </form>
