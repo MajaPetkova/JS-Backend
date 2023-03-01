@@ -28,12 +28,15 @@ const existing = await Auction.findById(id);
     await existing.save();
 
 }
-
+async function deleteAuction(id){
+    await Auction.findByIdAndDelete(id)
+}
 
 module.exports = {
   getAllAuctions,
   getAuctionById,
   createAuction,
   getAuctionAndUsers,
-  updateAuction
+  updateAuction,
+  deleteAuction
 };

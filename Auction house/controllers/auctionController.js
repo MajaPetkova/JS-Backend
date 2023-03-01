@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { isUser, isOwner } = require("../middleware/guards");
 const preload = require("../middleware/preload");
-const { createAuction, updateAuction } = require("../services/auctionService");
+const { createAuction, updateAuction, deleteAuction } = require("../services/auctionService");
 const mapErrors = require("../util/mapper");
 
 router.get("/create", isUser(), (req, res) => {
@@ -48,8 +48,13 @@ router.post("/edit/:id", preload(), isOwner(), async (req, res) => {
     console.error(err);
     const errors = mapErrors(err);
     auction._id = id;
-    res.render("edit", { title: "Update Page", data: auction, errors });
+    res.render("edit", { title: "Update Page", auction, errors });
   }
+});
+
+router.get("/delete/:id", preload(), isOwner(), async(req, res) => {
+await deleteAuction(req.params.id)
+  res.redirect("/catalog")
 });
 
 module.exports = router;
