@@ -1,5 +1,9 @@
 const authController= require("../controllers/authController")
+const auctionController= require("../controllers/auctionController");
+const homeController = require("../controllers/homeController")
 
 module.exports= (app)=>{
-    app.use(authController)
+    app.use(authController);
+    app.use(auctionController);
+    app.use(homeController)
 }
