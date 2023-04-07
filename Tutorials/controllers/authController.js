@@ -31,7 +31,7 @@ router.get("/login",isGuest(), (req, res) => {
 });
 
 router.post("/login",isGuest(), async (req, res) => {
-  console.log(req.body.username, req.body.password)
+  // console.log(req.body.username, req.body.password)
   try {
     const user = await login(req.body.username, req.body.password);
 
