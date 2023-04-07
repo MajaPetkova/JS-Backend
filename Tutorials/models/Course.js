@@ -9,7 +9,7 @@ const courseSchema = new Schema({
   description: { type: String, required: true },
   imageUrl: { type: String, required: true },
   duration: { type: String, required: true },
-  createdAt: { type: String, required: true },
+  createdAt: { type: String },
   usersEnrolled: { type: [ObjectId], ref: "User", default: [] },
   owner: {type:ObjectId , ref: "User", required :true }
 });
