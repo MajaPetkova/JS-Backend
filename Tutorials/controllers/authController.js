@@ -7,7 +7,6 @@ router.get("/register", isGuest(), (req, res) => {
   res.render("register");
 });
 
-// TODO check form actions methods field names
 router.post("/register",isGuest(), async (req, res) => {
   try {
     if(req.body.password.trim() == ""){
@@ -31,7 +30,6 @@ router.get("/login",isGuest(), (req, res) => {
   res.render("login");
 });
 
-// TODO check form actions methods field names
 router.post("/login",isGuest(), async (req, res) => {
   console.log(req.body.username, req.body.password)
   try {

@@ -14,7 +14,7 @@ async function start(){
 
     app.get("/", (req, res)=>{
         console.log(req.session)
-        res.render("home", {layout: false})
+        res.render("home", {title:"Tutorials Page"})
     });
     app.listen(3000, ()=>console.log("Server running on port 3000"))
 }
