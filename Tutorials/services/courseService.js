@@ -15,17 +15,23 @@ async function getCourseByIdAndUsers(id) {
 }
 async function editCourse(id, course) {
   const existing = await Course.findById(id);
-  
+
   existing.title = course.title;
   existing.description = course.description;
   existing.imageUrl = course.imageUrl;
   existing.duration = course.duration;
   await existing.save();
 }
+
+async function deleteCourse(id){
+  await Course.findByIdAndDelete(id)
+}
+
 module.exports = {
   createCourse,
   getCourseById,
   getAllCourses,
   getCourseByIdAndUsers,
   editCourse,
+  deleteCourse
 };
