@@ -26,12 +26,24 @@ async function editCourse(id, course) {
 async function deleteCourse(id){
   await Course.findByIdAndDelete(id)
 }
-
+async function enrollCourse(courseId, userId){
+const course=await Course.findById(courseId);
+if(course.usersEnrolled.includes (userId)){
+  throw new Error("User is already on the list")
+}
+course.usersEnrolled.push(userId);
+await course.save()
+}
+// async function searchCourse(name){
+//     await Course.find({title: {$regex:name, $options: "i"}})
+// }
 module.exports = {
   createCourse,
   getCourseById,
   getAllCourses,
   getCourseByIdAndUsers,
   editCourse,
-  deleteCourse
+  deleteCourse,
+  enrollCourse
+//   searchCourse
 };
