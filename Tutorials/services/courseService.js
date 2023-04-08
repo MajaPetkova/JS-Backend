@@ -10,9 +10,13 @@ async function createCourse (course){
 async function getCourseById(id){
     return Course.findById(id).lean();
 }
+async function getCourseByIdAndUsers(id){
+    return Course.findById(id).populate("owner").populate("usersEnrolled").lean();
+}
 
 module.exports = {
     createCourse,
     getCourseById,
-    getAllCourses
+    getAllCourses,
+    getCourseByIdAndUsers
 }

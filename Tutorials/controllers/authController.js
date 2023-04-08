@@ -12,7 +12,7 @@ router.post("/register",isGuest(), async (req, res) => {
     if(req.body.password.trim() == ""){
       throw new Error("Password is required!");
     }
-    if (req.body.password != req.body.repass) {
+    if (req.body.password != req.body.rePassword) {
       throw new Error("Passwords don't match");
     }
     const user = await register(req.body.username, req.body.password);
