@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { isUser, isOwner } = require("../middleware/guards");
 const preload = require("../middleware/preload");
-const { createCourse } = require("../services/courseService");
+const { createCourse, editCourse } = require("../services/courseService");
 const mapErrors = require("../util/mapper");
 
 
@@ -32,4 +32,27 @@ router.get("/course/create", isUser(), (req, res) => {
   router.get("/edit/:id",preload(), isOwner(), (req, res) => {
     res.render("edit", {title:"Edit Course", });
   });
+
+  router.post("/edit/:id",preload(), isOwner(), async(req, res) => {
+    // console.log(req.body)
+    const id= req.params.id;
+    const course={
+      title: req.body.title,
+      description: req.body.description,
+      imageUrl: req.body.imageUrl,
+      duration: req.body.duration
+    }
+
+    try{
+      await editCourse(id, course)
+      res.redirect('/catalog')
+    }catch(err){
+      console.error(err);
+      const errors= mapErrors(err);
+      course._id=id;
+      res.render("edit", {title:"Edit Course", course, errors});
+    }
+  });
+
+  
 module.exports= router;
