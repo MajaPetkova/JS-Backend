@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { isUser } = require("../middleware/guards");
+const { isUser, isOwner } = require("../middleware/guards");
+const preload = require("../middleware/preload");
 const { createCourse } = require("../services/courseService");
 const mapErrors = require("../util/mapper");
 
@@ -28,5 +29,7 @@ router.get("/course/create", isUser(), (req, res) => {
     }
   });
 
-
+  router.get("/edit/:id",preload(), isOwner(), (req, res) => {
+    res.render("edit", {title:"Edit Course", });
+  });
 module.exports= router;
