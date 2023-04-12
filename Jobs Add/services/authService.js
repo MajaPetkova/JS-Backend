@@ -20,8 +20,8 @@ async function register(email, password, skills) {
 }
 
 // TODO change identifier
-async function login(username, password) {
-  const user = await getUserByUserName(username);
+async function login(email, password) {
+  const user = await getUserByEmail(email);
 
   if (!user) {
     throw new Error("User doesn\'t exist");

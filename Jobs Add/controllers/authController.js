@@ -9,7 +9,6 @@ router.get("/register", isGuest(), (req, res) => {
 
 // TODO check form actions methods field names
 router.post("/register",isGuest(), async (req, res) => {
-  console.log(req.body)
   try {
     if(req.body.password.trim() == ""){
       throw new Error("Password is required!");
@@ -35,9 +34,9 @@ router.get("/login",isGuest(), (req, res) => {
 
 // TODO check form actions methods field names
 router.post("/login",isGuest(), async (req, res) => {
-  console.log(req.body.username, req.body.password)
+  console.log(req.body.email, req.body.password)
   try {
-    const user = await login(req.body.username, req.body.password);
+    const user = await login(req.body.email, req.body.password);
 
     req.session.user = user;
     res.redirect("/");
@@ -45,7 +44,7 @@ router.post("/login",isGuest(), async (req, res) => {
     console.error(err);
     // TODO Send error messages
     const errors= mapErrors(err)
-    res.render("login", { data: { username: req.body.username }, errors});
+    res.render("login", { data: { email: req.body.email }, errors});
   }
 });
 
