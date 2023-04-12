@@ -4,7 +4,7 @@ const { register, login } = require("../services/authService");
 const mapErrors = require("../util/mapper");
 
 router.get("/register", isGuest(), (req, res) => {
-  res.render("register");
+  res.render("register" , {title:"Register Page"} );
 });
 
 
@@ -28,7 +28,7 @@ router.post("/register",isGuest(), async (req, res) => {
 });
 
 router.get("/login",isGuest(), (req, res) => {
-  res.render("login");
+  res.render("login", {title: "Login Page"});
 });
 
 

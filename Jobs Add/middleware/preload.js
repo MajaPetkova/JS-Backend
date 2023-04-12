@@ -1,5 +1,5 @@
 //TODO replace with actual service;
-const collectionService = {};
+const adService = require("../services/adService")
 
 function preload(populate) {
   return async function (req, res, next) {
@@ -7,9 +7,9 @@ function preload(populate) {
     //TODO: change propertyName to match collection // data-change and collection name
     
     if (populate) {
-      res.locals.trip = await tripService.getTripAndUsers(id);
+      res.locals.ad = await adService.getAdAndUsers(id);
     } else {
-      res.locals.trip = await tripService.getTripById(id);
+      res.locals.ad = await adService.getAdById(id);
     }
 
     next();
