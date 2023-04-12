@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 require("../models/User");
-// TODO: all models
+require("../models/Ad")
 
 const dbName = "JobsAdd";
 const connectionString = `mongodb://localhost:27017/${dbName}`;

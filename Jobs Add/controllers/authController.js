@@ -7,7 +7,7 @@ router.get("/register", isGuest(), (req, res) => {
   res.render("register");
 });
 
-// TODO check form actions methods field names
+
 router.post("/register",isGuest(), async (req, res) => {
   try {
     if(req.body.password.trim() == ""){
@@ -19,10 +19,9 @@ router.post("/register",isGuest(), async (req, res) => {
     const user = await register(req.body.email, req.body.password, req.body.skills);
     req.session.user = user;
     res.redirect("/");
-    // redirect control
   } catch (err) {
     console.error(err);
-     // TODO Send error messages
+
      const errors= mapErrors(err)
     res.render("register", { data: { email: req.body.email, skills:req.body.skills }, errors});
   }
@@ -32,7 +31,7 @@ router.get("/login",isGuest(), (req, res) => {
   res.render("login");
 });
 
-// TODO check form actions methods field names
+
 router.post("/login",isGuest(), async (req, res) => {
   console.log(req.body.email, req.body.password)
   try {
@@ -42,7 +41,7 @@ router.post("/login",isGuest(), async (req, res) => {
     res.redirect("/");
   } catch (err) {
     console.error(err);
-    // TODO Send error messages
+
     const errors= mapErrors(err)
     res.render("login", { data: { email: req.body.email }, errors});
   }

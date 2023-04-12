@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const { hash, compare } = require("bcrypt");
 
-// TODO add all fields required by the exam
+
 async function register(email, password, skills) {
   const existing = await getUserByEmail(email);
 
@@ -18,8 +18,6 @@ async function register(email, password, skills) {
   await user.save();
   return user;
 }
-
-// TODO change identifier
 async function login(email, password) {
   const user = await getUserByEmail(email);
 
@@ -34,7 +32,6 @@ async function login(email, password) {
   return user;
 }
 
-// TODO identify user by given identifier
 async function getUserByEmail(email) {
   const user = await User.findOne({ email : new RegExp(`^${email}$`, "i") });
   return user;
