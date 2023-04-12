@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { isUser, isOwner } = require("../middleware/guards");
 const preload = require("../middleware/preload");
-const { createCourse, editCourse, deleteCourse, enrollCourse } = require("../services/courseService");
+const { createCourse, editCourse, deleteCourse, enrollCourse, getAllCourses } = require("../services/courseService");
 const mapErrors = require("../util/mapper");
 
 
@@ -70,4 +70,11 @@ router.get("/course/create", isUser(), (req, res) => {
     res.redirect("/catalog/" +id);
    }
  });
+
+ router.get("/search", async(req, res) =>{
+  let search= req.query;
+  const courses= await getAllCourses(search)
+  console.log(courses)
+  res.render("catalog" , {courses})
+ })
 module.exports= router;

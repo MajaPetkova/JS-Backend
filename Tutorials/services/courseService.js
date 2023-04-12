@@ -1,7 +1,7 @@
 const Course = require("../models/Course");
 
-async function getAllCourses() {
-  return Course.find({}).lean();
+async function getAllCourses(search = "") {
+  return Course.find({title: { $regex: new RegExp(search, 'i') }}).lean();
 }
 async function createCourse(course) {
   const result = new Course(course);
@@ -45,5 +45,5 @@ module.exports = {
   editCourse,
   deleteCourse,
   enrollCourse
-//   searchCourse
+  // searchCourse
 };
