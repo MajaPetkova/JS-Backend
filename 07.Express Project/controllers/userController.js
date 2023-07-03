@@ -48,7 +48,7 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new Error("All fields are required");
   }
   const user = await User.findOne({ email });
-  // console.log(user)
+
   // compare password with hashedPassword
   if (user && (await bcrypt.compare(password, user.password))) {
     const accessToken = jwt.sign({
@@ -57,7 +57,7 @@ const loginUser = asyncHandler(async (req, res) => {
         email: user.email,
         id: user.id
       }, 
-    }, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "1m"});
+    }, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "1d"});
     res.status(200).json({ accessToken });
   }else{
     res.status(401);
