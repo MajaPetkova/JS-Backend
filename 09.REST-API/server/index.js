@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("./middlewares/cors");
+const cors = require("./src/middlewares/cors");
+const furnitureController = require("./src/controllers/furniture");
 
 async function start() {
   try {
@@ -14,10 +15,12 @@ async function start() {
   const app = express();
 
   app.use(express.json());
-  app.use(cors())
-  
-  app.listen(3030, () => { console.log("REST Service is listening on port 3030")
+  app.use(cors());
+
+  app.use("/data/catalog", furnitureController);
+
+  app.listen(3030, () => {
+    console.log("REST Service is listening on port 3030");
   });
 }
 start();
-
