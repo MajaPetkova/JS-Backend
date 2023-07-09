@@ -25,4 +25,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/logout", (req, res)=>{
+    api.logout(req.user.token)
+    res.status(204).end()
+})
+
 module.exports = router;
