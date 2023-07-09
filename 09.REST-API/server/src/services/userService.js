@@ -18,7 +18,17 @@ async function register(email, password) {
   return createSession(user);
 }
 
-async function login(email, password) {}
+async function login(email, password) {
+  const user = await User.findOne({ email: new RegExp(`^${email}$`, "i") });
+  if (!user) {
+    throw new Error("Incorrect Email or Password");
+  }
+  const match = await bcrypt.compare(password, user.hashedPassword);
+  if (!match) {
+    throw new Error("Incorrect Email or Password");
+  }
+  return createSession(user);
+}
 
 function createSession(user) {
   const payload = {
