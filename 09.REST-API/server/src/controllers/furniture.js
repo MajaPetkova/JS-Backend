@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { isAuth } = require("../middlewares/guards");
+const { isAuth, isOwner } = require("../middlewares/guards");
+const preload = require("../middlewares/preload");
 const api = require("../services/furnitureService");
 const errorMapper = require("../util/errorMapper");
 
@@ -28,17 +29,11 @@ router.post("/",isAuth(), async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const item = await api.getById(id);
-  if (item) {
-    res.json(item);
-  } else {
-    res.status(404).json({ message: `Item with ${id} id is not found!` });
-  }
+router.get("/:id",preload(), (req, res) => {
+ res.json(res.locals.item)
 });
 
-router.put("/:id",isAuth(), async (req, res) => {
+router.put("/:id", preload(), isOwner(), async (req, res) => {
   const id = req.params.id;
   const item = {
     make: req.body.make,
@@ -62,7 +57,7 @@ router.put("/:id",isAuth(), async (req, res) => {
   }
 });
 
-router.delete("/:id",isAuth(), async (req, res) => {
+router.delete("/:id",isAuth(),isOwner(), async (req, res) => {
   const id = req.params.id;
   try {
     const result = await api.deleteById(id);
