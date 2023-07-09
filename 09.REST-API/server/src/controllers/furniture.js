@@ -29,23 +29,13 @@ router.post("/",isAuth(), async (req, res) => {
   }
 });
 
-router.get("/:id",preload(), (req, res) => {
+router.get("/:id",preload(api), (req, res) => {
  res.json(res.locals.item)
 });
 
-router.put("/:id", preload(), isOwner(), async (req, res) => {
-  const id = req.params.id;
-  const item = {
-    make: req.body.make,
-    model: req.body.model,
-    year: req.body.year,
-    description: req.body.description,
-    price: req.body.price,
-    img: req.body.img,
-    material: req.body.material,
-  };
+router.put("/:id", preload(api), isOwner(), async (req, res) => {
   try {
-    const result = await api.updateById(id, item);
+    const result = await api.updateById( res.locals.item, req.body);
     res.json(result);
   } catch (err) {
     if (err._notFound) {

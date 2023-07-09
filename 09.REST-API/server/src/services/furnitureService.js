@@ -22,9 +22,7 @@ async function getById(id) {
   return Item.findById(id);
 }
 
-async function updateById(id, item) {
-  const existing = await Item.findById(id);
-  if (existing) {
+async function updateById(existing, item ) {
     existing.make = item.make;
     existing.model = item.model;
     existing.year = item.year;
@@ -35,11 +33,7 @@ async function updateById(id, item) {
 
     await existing.save();
     return existing;
-  } else {
-    const error= new Error("Not Found");
-    error._notFound = true;
-    throw error;
-  }
+
 }
 
 async function deleteById(id) {
