@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = "hfghjglgnfdmgidfgjdfngmbw.,mbja/nqww";
 
 async function register(email, password) {
-  const existing = await User.find({ email: new RegExp(`^${email}$`, "i") });
+  const existing = await User.findOne({ email: new RegExp(`^${email}$`, "i") });
 
   if (existing) {
     throw new Error("Email is taken");
@@ -27,7 +27,7 @@ function createSession(user) {
   };
 
   const accessToken = jwt.sign(payload, JWT_SECRET);
-  
+
   return {
     email: user.email,
     accessToken,
