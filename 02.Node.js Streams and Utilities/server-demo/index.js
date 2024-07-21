@@ -1,20 +1,20 @@
 const http = require("http");
-const fs= require("fs");
+const fs = require("fs");
 
+const { get, post, match } = require("./src/router");
 
-http.createServer((req, res)=>{
-const url= new URL(req.url, `http://${req.headers.host}`)
-// console.log(url.pathname)
+get("/", (req, res) => {
+  res.write("Hello");
+  res.end();
+});
 
-if(url.pathname == "/"){
-    res.writeHead(301, {
-        Location: "index.html"
-    });
-    res.end();
-    fs.createReadStream(`./static/index.html`).pipe(res)
-}else if(url.pathname.slice(-5) == ".html"){
-    fs.createReadStream(`./static${url.pathname}`).pipe(res)
-}
+http.createServer((req, res) => {
+    // const url = new URL(req.url, `http://${req.headers.host}`);
+    // console.log(url.pathname)
 
-
-}).listen(3000)
+    if (req.url.startsWith("/public/")) {
+      fs.createReadStream(`./static/${req.url.slice(8)}`).pipe(res);
+    } else {
+      match(req, res);
+    }
+  }).listen(3000);
