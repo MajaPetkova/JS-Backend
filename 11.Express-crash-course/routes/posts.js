@@ -44,4 +44,29 @@ router.post("/", (req, res) => {
   res.status(201).json(posts);
 });
 
+//update post
+router.put("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const post = posts.find((post) => post.id === id);
+
+  if (!post) {
+    return res
+      .status(404)
+      .json({ message: `A post with this ${id} is not found` });
+  }
+  post.title = req.body.title;
+  res.status(201).json(posts);
+});
+
+// delete post
+router.delete("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const post = posts.find((post) => post.id === id);
+  if (!post) {
+    return res.status(404).json({ message: "This post is not found" });
+  }
+  posts = posts.filter((post) => post.id !== id);
+  res.status(200).json({ message: "Post is successfully deleted" });
+});
+
 export default router;
