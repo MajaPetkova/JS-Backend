@@ -26,7 +26,7 @@ async function showPosts() {
 //create new post
 async function addPost(e) {
   e.preventDefault();
-  const formData = new FormData();
+  const formData = new FormData(this);
   const title = formData.get("title");
   try {
     const res = await fetch("http://localhost:8000/api/posts", {
