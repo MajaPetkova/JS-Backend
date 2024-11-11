@@ -4,4 +4,8 @@
 
 <p>npm install</p>
 <p>npm start</p>
-![crypto1]{./crypto1.png}
+<img src="./crypto1.png">
+<img src="./crypto2.png">
+<img src="./crypto3.png">
+<img src="./crypto4.png">
+<img src="./crypto5.png">
