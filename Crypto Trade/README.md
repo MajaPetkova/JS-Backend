@@ -9,3 +9,4 @@
 <img src="./crypto3.png">
 <img src="./crypto4.png">
 <img src="./crypto5.png">
+<img src="./crypto6.png">
