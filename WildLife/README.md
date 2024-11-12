@@ -9,4 +9,3 @@
 <img src="./wildLife3.png">
 <img src="./wildLife4.png">
 <img src="./wildLife5.png">
-<img src="./wildLife6.png">
